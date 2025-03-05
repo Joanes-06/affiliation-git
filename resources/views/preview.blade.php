@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>BLIX - Mobile WEB APP Template</title>
+<title>BLIX - JOJO</title>
 <meta name="author" content="sindevo.com">
 <meta name="description" content="mobile HTML template">
 <link rel="stylesheet" href="{{ asset('preview/preview.css') }}">
