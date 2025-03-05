@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/accueil', function () {
+    return view('accueil');
+});
+
+Route::get('/okk', function () {
+    return view('preview');
+});
 
 Route::middleware([
     'auth:sanctum',
