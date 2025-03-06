@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/accueil', function () {
-    return view('accueil');
+    return view('front.accueil');
 });
 
 Route::get('/okk', function () {
