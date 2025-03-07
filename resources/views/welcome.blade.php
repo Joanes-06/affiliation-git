@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel affiliation</title>
+
+        <title>Laravel - jo</title>
+
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,7 +30,8 @@
                             href="{{ url('/dashboard') }}"
                             class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal"
                         >
-                            Dashboard Affiliation Project
+
+                            Dashboard boss
                         </a>
                     @else
                         <a

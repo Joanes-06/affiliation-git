@@ -6,7 +6,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/accueil', function () {
-    return view('accueil');
+    return view('front.accueil');
+});
+Route::get('/plan', function () {
+    return view('front.plan');
+});
+Route::get('/indet', function () {
+    return view('front.index');
 });
 
 Route::get('/okk', function () {
