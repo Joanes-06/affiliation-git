@@ -714,3 +714,7 @@ input:checked + .curseur:before {
             text-align: center;
         }
     }
+
+    .text-danger {
+        color: red;
+    }

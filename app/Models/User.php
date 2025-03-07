@@ -26,10 +26,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'phone', 'ville', 'code_parrain','parrain_id'
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -64,4 +63,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getParrainageLinkAttribute()
+{
+    return url('/register?parrain=' . $this->id);
+}
 }

@@ -183,7 +183,7 @@
 			<div class=""></div>
 			<div class="">
 			  <div class="swiper-slide toolbar-icon">
-				<a href="#" data-popup=".popup-signup" class="open-popup"><img src="{{ asset('assets/images/icons/blue/users.png') }}" alt="" title="" /><span>INSCRIPTION</span></a>
+				<a href="{{route('register')}}"><img src="{{ asset('assets/images/icons/blue/users.png') }}" alt="" title="" /><span>INSCRIPTION</span></a>
 			        <a href="#" data-popup=".popup-login" class="open-popup"><img src="{{ asset('assets/images/icons/blue/user.png') }}" alt="" title="" /><span>CONNEXION</span></a>
 				<a href="#" data-popup=".popup-plan" class="open-popup"><img src="{{ asset('assets/images/icons/blue/more.png') }}" alt="" title="" /><span>PACK DISPONIBLE</span></a>
 				<a href="#" data-popup=".popup-temoignage" class="open-popup"><img src="{{ asset('assets/images/icons/blue/temoignage.png') }}" alt="" title="" /><span>TÉMOIGNAGE</span></a>
@@ -233,13 +233,14 @@
       <h3>Inscription</h3>
       <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
         <div class="loginform">
-            <form id="RegisterForm" method="post">
-                <input type="text" name="Username" value="" class="form_input required" placeholder="Nom et prénom" />
-                <input type="text" name="Email" value="" class="form_input required" placeholder="Email" />
-                <input type="password" name="Password" value="" class="form_input required" placeholder="Mot de de passe" />
-                <input type="password" name="Password" value="" class="form_input required" placeholder="Confirmez le mot de de passe" />
-                <input type="tel" id="phone" name="phone" class="form_input required" placeholder="Entrez votre numéro">
-                <input type="text" name="Ville" id="ville" class="form_input required" placeholder="Ville"  />
+            <form id="RegisterForm" method="post" action="{{ route('register') }}">
+                @csrf
+                <input type="text" name="Username" value="" class="form_input " placeholder="Nom et prénom" />
+                <input type="text" name="Email" value="" class="form_input " placeholder="Email" />
+                <input type="password" name="Password" value="" class="form_input " placeholder="Mot de de passe" />
+                <input type="password" name="Password" value="" class="form_input " placeholder="Confirmez le mot de de passe" />
+                <input type="tel" id="phone" name="phone" class="form_input " placeholder="Entrez votre numéro">
+                <input type="text" name="Ville" id="ville" class="form_input " placeholder="Ville"  />
                 <input type="text" name="CodeParrain" id="code-parrain" class="form_input" placeholder="Code Parrain (Si vous en avez)" />
                 <input type="submit" name="submit" class="form_submit" id="submitregister" value="S'INSCRIRE" />
             </form>	

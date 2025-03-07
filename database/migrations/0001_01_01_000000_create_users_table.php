@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('ville')->nullable();
+            $table->string('code_parrain')->unique()->nullable();
+            $table->unsignedBigInteger('parrain_id')->nullable();
+            $table->foreign('parrain_id')->references('id')->on('users')->onDelete('set null');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
