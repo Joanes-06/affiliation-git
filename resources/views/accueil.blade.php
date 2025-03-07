@@ -203,6 +203,7 @@
           <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
             <div class="loginform">
                 <form id="RegisterForm" method="post">
+                   
                     <input type="text" name="Username" value="" class="form_input required" placeholder="Nom et prénom" />
                     <input type="text" name="Email" value="" class="form_input required" placeholder="Email" />
                     <input type="password" name="Password" value="" class="form_input required" placeholder="Mot de de passe" />
