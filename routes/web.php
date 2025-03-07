@@ -11,8 +11,8 @@ Route::get('/accueil', function () {
 Route::get('/plan', function () {
     return view('front.plan');
 });
-Route::get('/indet', function () {
-    return view('front.index');
+Route::get('/dashboard_accueil', function () {
+    return view('front.dashboard_accueil');
 });
 
 Route::get('/okk', function () {
