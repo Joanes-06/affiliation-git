@@ -8,6 +8,12 @@ Route::get('/', function () {
 Route::get('/accueil', function () {
     return view('front.accueil');
 });
+Route::get('/plan', function () {
+    return view('front.plan');
+});
+Route::get('/indet', function () {
+    return view('front.index');
+});
 
 Route::get('/okk', function () {
     return view('preview');
