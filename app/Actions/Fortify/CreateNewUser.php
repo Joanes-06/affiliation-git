@@ -14,7 +14,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
 
-    
+        dd($input);
         $rules = [
             'Username' => ['required', 'string', 'max:255'],
             'Email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
