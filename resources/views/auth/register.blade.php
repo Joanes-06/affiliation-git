@@ -94,9 +94,17 @@
                             <input type="hidden" name="parrain_id" value="{{ request()->query('parrain') }}">
                             <!-- Champ Nom -->
                             <div>
-                                <x-label for="name" value="{{ __('Name') }}" />
-                                <x-input id="name" class="form_input" type="text" name="Username" :value="old('Username')" required autofocus autocomplete="name" placeholder="Nom et prénom" />
+                                <x-label for="name" value="{{ __('Nom') }}" />
+                                <x-input id="lastname" class="form_input" type="text" name="Username" :value="old('Username')" required autofocus autocomplete="name" placeholder="Nom " />
                                 @error('Username')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!-- Champ Prénom -->
+                            <div>
+                                <x-label for="name" value="{{ __('Prénoms') }}" />
+                                <x-input id="Fistsname" class="form_input" type="text" name="Firstname" :value="old('Firstname')" required autofocus autocomplete="name" placeholder="prénoms" />
+                                @error('Firstname')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -112,7 +120,7 @@
 
                             <!-- Champ Mot de passe -->
                             <div class="mt-4">
-                                <x-label for="password" value="{{ __('Password') }}" />
+                                <x-label for="password" value="{{ __('Mot de passe') }}" />
                                 <x-input id="password" class="form_input" type="password" name="Password" required autocomplete="new-password" placeholder="Mot de passe" />
                                 @error('Password')
                                     <div class="text-danger">{{ $message }}</div>
@@ -121,7 +129,7 @@
 
                             <!-- Champ Confirmation du mot de passe -->
                             <div class="mt-4">
-                                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                                <x-label for="password_confirmation" value="{{ __('Confirmation du mot de passe') }}" />
                                 <x-input id="password_confirmation" class="form_input" type="password" name="Password_confirmation" required autocomplete="new-password" placeholder="Confirmez le mot de passe" />
                                 @error('Password_confirmation')
                                     <div class="text-danger">{{ $message }}</div>
@@ -130,7 +138,7 @@
 
                             <!-- Champ Téléphone -->
                             <div class="mt-4">
-                                <x-label for="phone" value="{{ __('Phone') }}" />
+                                <x-label for="phone" value="{{ __('Téléphone') }}" />
                                 <input type="tel" id="phone" name="phone" class="form_input" placeholder="Entrez votre numéro" value="{{ old('phone') }}" />
                                 @error('phone')
                                     <div class="text-danger">{{ $message }}</div>
@@ -139,21 +147,21 @@
 
                             <!-- Champ Ville -->
                             <div class="mt-4">
-                                <x-label for="ville" value="{{ __('City') }}" />
+                                <x-label for="ville" value="{{ __('Ville') }}" />
                                 <input type="text" name="Ville" id="ville" class="form_input" placeholder="Ville" value="{{ old('Ville') }}" />
                                 @error('Ville')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Champ Code Parrain -->
-                            <div class="mt-4">
-                                <x-label for="code-parrain" value="{{ __('Referral Code') }}" />
-                                <input type="text" name="code-parrain" id="code-parrain" class="form_input" placeholder="Code Parrain (Si vous en avez)" value="{{ old('code-parrain') }}" />
-                                @error('code-parrain')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                           <!-- Champ Code Promo -->
+                        <div class="mt-4">
+                            <x-label for="code_promo" value="{{ __('Code de promotion') }}" />
+                            <input type="text" name="code_promo" id="code_promo" class="form_input" placeholder="Code Promo (Si vous en avez)" value="{{ $codePromo ?? old('code_promo') }}" {{ isset($codePromo) ? 'readonly' : '' }} />
+                            @error('code_promo')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
 
 
                                             <!-- Conditions d'utilisation (si activé dans Jetstream) -->
@@ -195,6 +203,39 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer le paramètre 'code' de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get('code');
+    
+    // Si un code est présent dans l'URL, remplir le champ
+    if (codeParam) {
+        const codeField = document.getElementById('code_promo');
+        if (codeField) {
+            codeField.value = codeParam;
+            codeField.readOnly = true;
+        }
+    }
+});
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer le paramètre 'code' de l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const codeParam = urlParams.get('code');
+            
+            // Si un code est présent dans l'URL, remplir le champ
+            if (codeParam) {
+                const codeField = document.getElementById('code_promo');
+                if (codeField) {
+                    codeField.value = codeParam;
+                    codeField.readOnly = true;
+                }
+            }
+        });
+        </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script>
         var input = document.querySelector("#phone");

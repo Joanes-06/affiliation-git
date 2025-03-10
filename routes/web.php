@@ -11,7 +11,7 @@ Route::get('/mon-parrainage', function () {
     $user = Auth::user();
     if (!$user) return redirect('/login');
 
-    $lienParrainage = url('/register?parrain=' . $user->code_parrain);
+    $lienParrainage = route('register', ['code' => $user->code_promo]);
     return view('parrainage', compact('lienParrainage'));
 })->middleware('auth');
 
@@ -32,6 +32,10 @@ Route::get('/okk', function () {
     return view('preview');
 });
 
+Route::get('/invite/{code}', function ($code) {
+    return redirect()->route('register', ['code' => $code]);
+})->name('invite.link');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -42,32 +46,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/telecharger-vcf', function (Request $request) {
-    $users = User::query();
+// Routes pour les vCards
+Route::middleware(['auth'])->group(function () {
+    Route::get('/contacts', [App\Http\Controllers\VCardController::class, 'index'])->name('contacts.index');
+    Route::post('/contacts/download', [App\Http\Controllers\VCardController::class, 'download'])->name('contacts.download');
+    Route::get('/contacts/download/{user}', [App\Http\Controllers\VCardController::class, 'downloadSingle'])->name('contacts.download.single');
+});
 
-    // Appliquer le filtre par période si les dates sont fournies
-    if ($request->has('start_date') && $request->has('end_date')) {
-        $users = $users->whereBetween('created_at', [$request->start_date, $request->end_date]);
-    }
-
-    // Créer un objet VCard
-    $vcard = new VCard();
-
-    foreach ($users->get() as $user) {
-        $vcard->addName($user->name . ' BLIX');
-        $vcard->addCompany('Mon Entreprise'); // Optionnel
-        $vcard->addJobtitle('Utilisateur'); // Optionnel
-        $vcard->addEmail($user->email);
-        $vcard->addPhoneNumber($user->whatsapp, 'WORK'); // Numéro WhatsApp
-        $vcard->addAddress(null, null, $user->ville);
-        $vcard->addURL(url('/register?parrain=' . $user->code_parrain));
-    }
-
-    // Télécharger le fichier
-    return response()->streamDownload(function () use ($vcard) {
-        echo $vcard->getOutput();
-    }, 'contacts.vcf', [
-        'Content-Type' => 'text/vcard',
-        'Content-Disposition' => 'attachment; filename="contacts.vcf"',
-    ]);
-})->middleware('auth');

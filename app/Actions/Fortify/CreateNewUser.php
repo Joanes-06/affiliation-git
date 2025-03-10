@@ -13,21 +13,30 @@ class CreateNewUser implements CreatesNewUsers
 {
     public function create(array $input)
     {
+<<<<<<< HEAD
 
         dd($input);
+=======
+        // Règles de validation
+>>>>>>> norman
         $rules = [
             'Username' => ['required', 'string', 'max:255'],
+            'Firstname' => ['required', 'string', 'max:255'],
             'Email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'Password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'max:20'],
             'Ville' => ['required', 'string', 'max:100'],
-            'parrain_id' => ['nullable', 'exists:users,id'],
+            'code_promo' => ['nullable', 'string', 'exists:users,code_promo'],
         ];
     
         $messages = [
-            'Username.required' => 'Le champ Nom et prénom est requis.',
-            'Username.string' => 'Le champ Nom et prénom doit être une chaîne de caractères.',
-            'Username.max' => 'Le champ Nom et prénom ne doit pas dépasser 255 caractères.',
+            'Username.required' => 'Le champ Nom est requis.',
+            'Username.string' => 'Le champ Nom doit être une chaîne de caractères.',
+            'Username.max' => 'Le champ Nom ne doit pas dépasser 255 caractères.',
+
+            'Firstname.required' => 'Le champ prénom est requis.',
+            'Firstname.string' => 'Le champ  prénom doit être une chaîne de caractères.',
+            'Firstname.max' => 'Le champ prénom ne doit pas dépasser 255 caractères.',
     
             'Email.required' => 'Le champ Email est requis.',
             'Email.string' => 'Le champ Email doit être une chaîne de caractères.',
@@ -47,33 +56,52 @@ class CreateNewUser implements CreatesNewUsers
             'Ville.required' => 'La ville est requise.',
             'Ville.string' => 'La ville doit être une chaîne de caractères.',
             'Ville.max' => 'La ville ne doit pas dépasser 100 caractères.',
+            
+            'code_promo.exists' => 'Le code promo n\'est pas valide.',
         ];
     
         Validator::make($input, $rules, $messages)->validate();
     
-        // Générer le code parrain et obtenir l'ID du parrain
-        $codeParrain = Str::upper(Str::random(8));
-        $parrainId = $this->getParrainId($input['parrain_code'] ?? null);
-    
+        // Générer un code promo unique pour le nouvel utilisateur
+        $codePromo = Str::upper(Str::random(8));
+        
+        // Récupérer les informations de parrainage
+        $parrainageInfo = $this->getParrainageInfo($input['code_promo'] ?? null);
+        
         return User::create([
-            'name' => $input['Username'],
+            'lastname' => $input['Username'],
+            'firstname' => $input['Firstname'],
             'email' => $input['Email'],
             'password' => Hash::make($input['Password']),
             'phone' => $input['phone'],
             'ville' => $input['Ville'],
-            'code_parrain' => $codeParrain,
-              'parrain_id'=> $input['parrain_id'] ?? null,
+            'code_promo' => $codePromo,
+            'inviteur_id' => $parrainageInfo['inviteur_id'] ?? null,
+            'generation1_id' => $parrainageInfo['generation1_id'] ?? null,
+            'generation2_id' => $parrainageInfo['generation2_id'] ?? null,
         ]);
     }
     
-    
-
-    private function getParrainId($code)
-{
-    if ($code) {
-        $parrain = User::where('code_parrain', $code)->first();
-        return $parrain ? $parrain->id : null;
+    /**
+     * Récupérer les informations de parrainage sur 3 générations
+     */
+    private function getParrainageInfo($codePromo)
+    {
+        if (!$codePromo) {
+            return [];
+        }
+        
+        // Trouver l'utilisateur qui a partagé son code
+        $inviteur = User::where('code_promo', $codePromo)->first();
+        
+        if (!$inviteur) {
+            return [];
+        }
+        
+        return [
+            'inviteur_id' => $inviteur->id, // L'utilisateur direct qui a partagé son code
+            'generation1_id' => $inviteur->inviteur_id, // Le parrain de l'inviteur (génération 1)
+            'generation2_id' => $inviteur->generation1_id, // Le parrain du parrain (génération 2)
+        ];
     }
-    return null;
-}
 }
