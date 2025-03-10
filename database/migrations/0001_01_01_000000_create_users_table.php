@@ -13,15 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('lastname');
+            $table->string('firstname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('ville')->nullable();
-            $table->string('code_parrain')->unique()->nullable();
-            $table->unsignedBigInteger('parrain_id')->nullable();
-            $table->foreign('parrain_id')->references('id')->on('users')->onDelete('set null');
+            $table->string('code_promo')->unique()->nullable();
+            $table->unsignedBigInteger('inviteur_id')->nullable();
+            $table->unsignedBigInteger('generation1_id')->nullable();
+            $table->unsignedBigInteger('generation2_id')->nullable();
+            $table->json('last_vcard_downloads')->nullable(); // Ajout de cette colonne
+            $table->foreign('inviteur_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('generation1_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('generation2_id')->references('id')->on('users')->onDelete('set null');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
