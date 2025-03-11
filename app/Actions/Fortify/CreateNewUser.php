@@ -13,12 +13,7 @@ class CreateNewUser implements CreatesNewUsers
 {
     public function create(array $input)
     {
-<<<<<<< HEAD
-
-        dd($input);
-=======
         // Règles de validation
->>>>>>> norman
         $rules = [
             'Username' => ['required', 'string', 'max:255'],
             'Firstname' => ['required', 'string', 'max:255'],

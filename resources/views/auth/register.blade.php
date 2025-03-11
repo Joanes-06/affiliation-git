@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
     <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
-    <title>blix - mobile template</title>
+    <title>VISIBILITY</title>
     <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
@@ -79,11 +79,15 @@
                     <div class="page-content">
                         <div class="navbarpages navbarpagesbg">
                             <div class="navbar_left">
-                                <div class="logo_text"><a href="{{ asset('assets/index.html') }}">BLIX</a></div>
+                                <div class="logo_text"><a href="{{ asset('assets/index.html') }}"><img src="{{asset('assets/images/logo tout blanc.png')}}" alt=""></a></div>
                             </div>
                         </div>
                         <div id="pages_maincontent">
-                            <h2 class="page_title">PLAN D'ABONNEMENT</h2>
+                            <div class="top-register">
+                                <h4>VISIBILITY</h4>
+                                <h3>Se connecter</h3>
+                                <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
+                            </div>
                             <div class="page_single layout_fullwidth_padding">
                                 <div class="content-block">
                                     <div class="loginform">

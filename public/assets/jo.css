@@ -718,3 +718,55 @@ input:checked + .curseur:before {
     .text-danger {
         color: red;
     }
+
+   /*  style de entete register et login */
+
+   .top-register h4{
+    color:#222222;
+    font-size:22px;
+    font-weight:700;
+    text-align:center;
+    padding:0 0 20px 0;
+    margin-top: 18px;
+    }
+    .top-register h3{
+    color:#18ba1a;
+    font-size:22px;
+    font-weight:700;
+    text-align:center;
+    padding:0 0 20px 0;
+    margin:0px;
+    }
+    .top-register p{
+    text-align:center;
+    padding:0px 20px 20px 20px;
+    margin:0px;
+    font-size:14px;
+    }
+
+    .popup h4{
+        color:#222222;
+        font-size:22px;
+        font-weight:700;
+        text-align:center;
+        padding:0 0 20px 0;
+        margin:0px;
+        }
+        .popup h3{
+          color:#18ba1a;
+        font-size:22px;
+        font-weight:500;
+        text-align:left;
+        padding:0 0 20px 20px;
+        margin:0px;
+        }
+        .popup p{
+        text-align:left;
+        padding:0px 0 20px 20px;
+        margin:0px;
+        font-size:14px;
+        }
+        
+        .content-block {
+        padding:75px 10% 0 10%;
+        }
