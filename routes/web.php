@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\SouscriptionController;
 use JeroenDesloovere\VCard\VCard;
 
 use Illuminate\Support\Facades\Route;
@@ -24,9 +26,11 @@ Route::get('/accueil', function () {
 Route::get('/plan', function () {
     return view('front.plan');
 })->name('front.plan');
-Route::get('/dashboard_accueil', function () {
-    return view('front.dashboard_accueil');
-});
+
+
+Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
+Route::get('/dashboard-accueil', [SouscriptionController::class, 'index'])->name('dashboard_accueil');
+
 
 Route::get('/okk', function () {
     return view('preview');

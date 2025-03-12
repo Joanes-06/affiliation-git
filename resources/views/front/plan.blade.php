@@ -133,6 +133,12 @@
      <div id="pages_maincontent">
       
           <h2 class="page_title">PLAN D'ABONNEMENT</h2>
+          @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 			  
                   <!-- Slider -->
                  	  
@@ -142,125 +148,127 @@
 	  
               <blockquote>
                 Accédez à des fichiers de contacts et à des formations exclusives selon votre abonnement. Choisissez votre pack et développez votre réseau !                         </blockquote>
-			  <section class="sectionCartes">
-                <!-- Carte Débutant -->
-                <div class="carte">
-                    <div class="carteEntete">
-                        <h2 class="carteTitre">Débutant</h2>
-                        <div class="cartePrix" id="prixDebutant">2.000f</div>
-                        <div class="carteFrequence" id="frequenceDebutant">à vie</div>
+                <section class="sectionCartes">
+                    <!-- Carte Débutant -->
+                    <div class="carte">
+                        <div class="carteEntete">
+                            <h2 class="carteTitre">Débutant</h2>
+                            <div class="cartePrix" id="prixDebutant">2.000f</div>
+                            <div class="carteFrequence" id="frequenceDebutant">à vie</div>
+                        </div>
+                        <div class="carteContenu">
+                            <ul class="listeAvantages">
+                                <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
+                                <li class="avantage avantageActif">Retrait d'argent</li>
+                                <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
+                                <li class="avantage avantageInactif">Formation en trading</li>
+                                <li class="avantage avantageInactif">Formation en marketing 360</li>
+                                <li class="avantage avantageInactif">Formation sur l'achat en Chine</li>
+                                <li class="avantage avantageInactif">Formation en art oratoire</li>
+                            </ul>                        
+                        </div>
+                        <div class="cartePied">
+                            <form action="{{ route('feda.callback') }}" method="post" id="payment-form-debutant">
+                                @csrf
+                                <input type="hidden" name="field" value="test">
+                                <script
+                                    src="https://cdn.fedapay.com/checkout.js?v=1.1.7"
+                                    data-public-key="pk_sandbox_Vur68NwXhzndDz5kBO2TgyZ1"
+                                    data-button-text="Souscrire"
+                                    data-button-class="boutonInscription"
+                                    data-transaction-amount="2000"
+                                    data-transaction-description="Souscription au pack débutant de BLIX"
+                                    data-currency-iso="XOF"
+                                    data-customer-email="{{ Auth::user()->email }}" 
+                                    data-customer-firstname="{{ Auth::user()->firstname }}" 
+                                    data-customer-lastname="{{ Auth::user()->lastname }}" 
+                                    data-callback-url="{{ route('feda.callback') }}"
+                                ></script>
+                            </form>
+                        </div>
                     </div>
-                    <div class="carteContenu">
-                      <ul class="listeAvantages">
-                        <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
-                        <li class="avantage avantageActif">Retrait d'argent</li>
-                        <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
-                        <li class="avantage avantageInactif">Formation en trading</li>
-                        <li class="avantage avantageInactif">Formation en marketing 360</li>
-                        <li class="avantage avantageInactif">Formation sur l'achat en Chine</li>
-                        <li class="avantage avantageInactif">Formation en art oratoire</li>
-                    </ul>                        
-                    </div>
-                    <div class="cartePied">
-                        <button class="boutonInscription"
-                        id="pay-btn-1"
-                        data-transaction-amount="1000"
-                        data-transaction-description="Acheter mon produit"
-                        data-customer-email="johndoe@gmail.com"
-                        data-customer-lastname="Doe"
-                        >S'inscrire</button>
-                        <script type="text/javascript">
-                            FedaPay.init('#pay-btn-1', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
-                            transaction: {
-                            amount: 2000,
-                            description: 'Souscription au pack debutant de BLIX'
-                            },
-                            customer: {
-                            email: "{{ auth()->user()->email }}",
-                            lastname: "{{ auth()->user()->lastname }}",
-                            firstname: "{{ auth()->user()->firstname }}",
-                        }
-                             });
-                        </script>
-                    </div>
-                </div>
                 
-                <!-- Carte Pro -->
-                <div class="carte cartePopulaire">
-                    <div class="etiquettePopulaire">Populaire</div>
-                    <div class="carteEntete">
-                        <h2 class="carteTitre">Pro</h2>
-                        <div class="cartePrix" id="prixPro">5.000f</div>
-                        <div class="carteFrequence" id="frequencePro">à vie</div>
+                    <!-- Carte Pro -->
+                    <div class="carte cartePopulaire">
+                        <div class="etiquettePopulaire">Populaire</div>
+                        <div class="carteEntete">
+                            <h2 class="carteTitre">Pro</h2>
+                            <div class="cartePrix" id="prixPro">5.000f</div>
+                            <div class="carteFrequence" id="frequencePro">à vie</div>
+                        </div>
+                        <div class="carteContenu">
+                            <ul class="listeAvantages">
+                                <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
+                                <li class="avantage avantageActif">Retrait d'argent</li>
+                                <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
+                                <li class="avantage avantageActif">Formation en trading</li>
+                                <li class="avantage avantageActif">Formation en marketing 360</li>
+                                <li class="avantage avantageActif">Formation sur l'achat en Chine</li>
+                                <li class="avantage avantageInactif">Formation en art oratoire</li>
+                            </ul>
+                        </div>
+                        <div class="cartePied">
+                            <form action="{{ route('feda.callback') }}" method="post" id="payment-form-pro">
+                                @csrf
+                                <input type="hidden" name="field" value="test">
+                                <script
+                                    src="https://cdn.fedapay.com/checkout.js?v=1.1.7"
+                                    data-public-key="pk_sandbox_Vur68NwXhzndDz5kBO2TgyZ1"
+                                    data-button-text="Souscrire"
+                                    data-button-class="boutonInscription"
+                                    data-transaction-amount="5000"
+                                    data-transaction-description="Souscription au pack pro de BLIX"
+                                    data-currency-iso="XOF"
+                                    data-customer-email="{{ Auth::user()->email }}" 
+                                    data-customer-firstname="{{ Auth::user()->firstname }}" 
+                                    data-customer-lastname="{{ Auth::user()->lastname }}" 
+                                    data-callback-url="{{ route('feda.callback') }}"
+                                ></script>
+                            </form>
+                            </form>
+                        </div>
                     </div>
-                    <div class="carteContenu">
-                      <ul class="listeAvantages">
-                        <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
-                        <li class="avantage avantageActif">Retrait d'argent</li>
-                        <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
-                        <li class="avantage avantageActif">Formation en trading</li>
-                        <li class="avantage avantageActif">Formation en marketing 360</li>
-                        <li class="avantage avantageActif">Formation sur l'achat en Chine</li>
-                        <li class="avantage avantageInactif">Formation en art oratoire</li>
-                    </ul>
-                    
-                    </div>
-                    <div class="cartePied">
-                        <button id="pay-btn-2" class="boutonInscription">S'inscrire</button>
-                        <script type="text/javascript">
-                            FedaPay.init('#pay-btn-2', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
-                            transaction: {
-                            amount: 5000,
-                            description: 'Souscription au pack pro de BLIX'
-                            },
-                            customer: {
-                            email: "{{ auth()->user()->email }}",
-                            lastname: "{{ auth()->user()->lastname }}",
-                            firstname: "{{ auth()->user()->firstname }}",
-                            
-                        }
-                             });
-                        </script>
-                    </div>
-                </div>
                 
-                <!-- Carte Élite -->
-                <div class="carte">
-                    <div class="carteEntete">
-                        <h2 class="carteTitre">Élite</h2>
-                        <div class="cartePrix" id="prixElite">10.000f</div>
-                        <div class="carteFrequence" id="frequenceElite">à vie</div>
+                    <!-- Carte Élite -->
+                    <div class="carte">
+                        <div class="carteEntete">
+                            <h2 class="carteTitre">Élite</h2>
+                            <div class="cartePrix" id="prixElite">10.000f</div>
+                            <div class="carteFrequence" id="frequenceElite">à vie</div>
+                        </div>
+                        <div class="carteContenu">
+                            <ul class="listeAvantages">
+                                <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
+                                <li class="avantage avantageActif">Retrait d'argent</li>
+                                <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
+                                <li class="avantage avantageActif">Formation en trading</li>
+                                <li class="avantage avantageActif">Formation en marketing 360</li>
+                                <li class="avantage avantageActif">Formation sur l'achat en Chine</li>
+                                <li class="avantage avantageActif">Formation en art oratoire</li>
+                            </ul>
+                        </div>
+                        <div class="cartePied">
+                            <form action="{{ route('feda.callback') }}" method="post" id="payment-form-elite">
+                                @csrf
+                                <input type="hidden" name="field" value="test">
+                                <script
+                                    src="https://cdn.fedapay.com/checkout.js?v=1.1.7"
+                                    data-public-key="pk_sandbox_Vur68NwXhzndDz5kBO2TgyZ1"
+                                    data-button-text="Souscrire"
+                                    data-button-class="boutonInscription"
+                                    data-transaction-amount="10000"
+                                    data-transaction-description="Souscription au pack elite de BLIX"
+                                    data-currency-iso="XOF"
+                                    data-customer-email="{{ Auth::user()->email }}" 
+                                    data-customer-firstname="{{ Auth::user()->firstname }}" 
+                                    data-customer-lastname="{{ Auth::user()->lastname }}" 
+                                    data-callback-url="{{ route('feda.callback') }}"
+                                ></script>
+                            </form>
+                        </div>
                     </div>
-                    <div class="carteContenu">
-                      <ul class="listeAvantages">
-                        <li class="avantage avantageActif">Accès à la fiche de nos contacts</li>
-                        <li class="avantage avantageActif">Retrait d'argent</li>
-                        <li class="avantage avantageActif">Accès au groupe WhatsApp</li>
-                        <li class="avantage avantageActif">Formation en trading</li>
-                        <li class="avantage avantageActif">Formation en marketing 360</li>
-                        <li class="avantage avantageActif">Formation sur l'achat en Chine</li>
-                        <li class="avantage avantageActif">Formation en art oratoire</li>
-                    </ul>
-                    
-                    </div>
-                    <div class="cartePied">
-                        <button id="pay-btn-3" class="boutonInscription">S'inscrire</button>
-                        <script type="text/javascript">
-                            FedaPay.init('#pay-btn-3', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
-                            transaction: {
-                            amount: 10000,
-                            description: 'Souscription au pack Elite de BLIX'
-                            },
-                            customer: {
-                            email: "{{ auth()->user()->email }}",
-                            lastname: "{{ auth()->user()->lastname }}",
-                            firstname: "{{ auth()->user()->firstname }}",
-                        }
-                             });
-                        </script>
-                    </div>
-                </div>
-            </section>
+                </section>
+                
              
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('contacts.index') }}">
