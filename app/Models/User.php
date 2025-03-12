@@ -13,8 +13,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
@@ -26,15 +24,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 
-        'last_name', 
+        'lastname', 
+        'firstname', 
         'email', 
         'password', 
-        'whatsapp_number', 
-        'city', 
-        'sponsor_code'
+        'phone', 
+        'ville', 
+        'code_promo',
+        'inviteur_id',
+        'generation1_id',
+        'generation2_id',
+        'last_vcard_downloads'
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -66,6 +68,30 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_vcard_downloads' => 'array',
         ];
+    }
+    /**
+     * Obtenir le lien de parrainage de l'utilisateur
+     */
+    public function getPromotionLinkAttribute()
+    {
+        return url('/register?code=' . $this->code_promo);
+    }
+
+    /**
+     * Relation avec l'utilisateur qui a invité
+     */
+    public function inviteur()
+    {
+        return $this->belongsTo(User::class, 'inviteur_id');
+    }
+
+    /**
+     * Relation avec les utilisateurs invités directement
+     */
+    public function invites()
+    {
+        return $this->hasMany(User::class, 'inviteur_id');
     }
 }

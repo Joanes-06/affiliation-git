@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet"> 
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+@livewireStyles
+
 </head>
 <body id="mobile_wrap">
 
@@ -133,7 +136,8 @@
 			  
                   <!-- Slider -->
                  	  
-			  
+                  @livewire('navigation-menu')
+
 	<div class="page_single layout_fullwidth_padding">	
 	  
               <blockquote>
@@ -158,7 +162,26 @@
                     </ul>                        
                     </div>
                     <div class="cartePied">
-                        <button class="boutonInscription">S'inscrire</button>
+                        <button class="boutonInscription"
+                        id="pay-btn-1"
+                        data-transaction-amount="1000"
+                        data-transaction-description="Acheter mon produit"
+                        data-customer-email="johndoe@gmail.com"
+                        data-customer-lastname="Doe"
+                        >S'inscrire</button>
+                        <script type="text/javascript">
+                            FedaPay.init('#pay-btn-1', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
+                            transaction: {
+                            amount: 2000,
+                            description: 'Souscription au pack debutant de BLIX'
+                            },
+                            customer: {
+                            email: "{{ auth()->user()->email }}",
+                            lastname: "{{ auth()->user()->lastname }}",
+                            firstname: "{{ auth()->user()->firstname }}",
+                        }
+                             });
+                        </script>
                     </div>
                 </div>
                 
@@ -183,7 +206,21 @@
                     
                     </div>
                     <div class="cartePied">
-                        <button class="boutonInscription">S'inscrire</button>
+                        <button id="pay-btn-2" class="boutonInscription">S'inscrire</button>
+                        <script type="text/javascript">
+                            FedaPay.init('#pay-btn-2', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
+                            transaction: {
+                            amount: 5000,
+                            description: 'Souscription au pack pro de BLIX'
+                            },
+                            customer: {
+                            email: "{{ auth()->user()->email }}",
+                            lastname: "{{ auth()->user()->lastname }}",
+                            firstname: "{{ auth()->user()->firstname }}",
+                            
+                        }
+                             });
+                        </script>
                     </div>
                 </div>
                 
@@ -207,12 +244,29 @@
                     
                     </div>
                     <div class="cartePied">
-                        <button class="boutonInscription">S'inscrire</button>
+                        <button id="pay-btn-3" class="boutonInscription">S'inscrire</button>
+                        <script type="text/javascript">
+                            FedaPay.init('#pay-btn-3', { public_key:'pk_sandbox_PcLvHspU5B559J8ru0DErYg9',
+                            transaction: {
+                            amount: 10000,
+                            description: 'Souscription au pack Elite de BLIX'
+                            },
+                            customer: {
+                            email: "{{ auth()->user()->email }}",
+                            lastname: "{{ auth()->user()->lastname }}",
+                            firstname: "{{ auth()->user()->firstname }}",
+                        }
+                             });
+                        </script>
                     </div>
                 </div>
             </section>
              
-              
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('contacts.index') }}">
+                    <i class="fas fa-address-book"></i> Télécharger contacts
+                </a>
+            </li>
               <a href="{{ asset('assets/index.html') }}" class="button_full btyellow">Revenir à l'accueil</a>
 
            
@@ -316,5 +370,6 @@
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}" ></script>
 <script src="{{ asset('assets/js/swiper.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.custom.js') }}"></script>
+@livewireScripts
   </body>
 </html>

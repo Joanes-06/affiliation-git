@@ -25,18 +25,25 @@
                 <div class="user_thumb">
                 <img src="{{ asset('assets/images/page_photo.jpg') }}" alt="" title="" />
                   <div class="user_details">
-                   <p>Welcome, <span>Nathalie</span></p>
+
+                   <p>Bienvenue, <span>l'equipe GBAYE</span></p>
+                   
                   </div>  
                   <div class="user_avatar"><img src="{{ asset('assets/images/avatar.jpg') }}" alt="" title="" /></div>       
                 </div>
 				
                   <nav class="user-nav">
                     <ul>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/settings.png') }}" alt="" title="" /><span>Account Settings</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/briefcase.png') }}" alt="" title="" /><span>My Account</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong>12</strong></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/love.png') }}" alt="" title="" /><span>Favorites</span><strong>5</strong></a></li>
-                      <li><a href="{{ asset('assets/index.html') }}"><img src="{{ asset('assets/images/icons/white/lock.png') }}" alt="" title="" /><span>Logout</span></a></li>
+
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/settings.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/briefcase.png') }}" alt="" title="" /><span>Affiliation</span></a></li>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/message.png') }}" alt="" title="" /><span>Tout les contacts</span><strong>12</strong></a></li>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/love.png') }}" alt="" title="" /><span>Mise a jour des contact</span><strong>5</strong></a></li>
+                      <hr>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/briefcase.png') }}" alt="" title="" /><span>Rejoindre la communauter</span></a></li>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/message.png') }}" alt="" title="" /><span>Rejoindre la formation trading</span><strong>12</strong></a></li>
+                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/love.png') }}" alt="" title="" /><span>Marketing</span><strong>5</strong></a></li>
+                      <li><a href="{{ asset('assets/index.html') }}"><img src="{{ asset('assets/images/icons/white/lock.png') }}" alt="" title="" /><span>Déconnexion</span></a></li>
                     </ul>
                   </nav>
       </div>
@@ -111,69 +118,7 @@
          </div>
     </div>
 
-    <!-- Login Popup -->
-    <div class="popup popup-login">
-        <div class="content-block">
-            <h4>LOGIN</h4>
-            <div class="loginform">
-                <form id="LoginForm" method="post">
-                    <input type="text" name="Username" value="" class="form_input required" placeholder="username" />
-                    <input type="password" name="Password" value="" class="form_input required" placeholder="password" />
-                    <div class="forgot_pass"><a href="{{ asset('assets/#') }}" data-popup=".popup-forgot" class="open-popup">Forgot Password?</a></div>
-                    <input type="submit" name="submit" class="form_submit" id="submit" value="SIGN IN" />
-                </form>
-                <div class="signup_bottom">
-                    <p>Don't have an account?</p>
-                    <a href="{{ asset('assets/#') }}" data-popup=".popup-signup" class="open-popup">SIGN UP</a>
-                </div>
-            </div>
-            <div class="close_popup_button">
-                <a href="{{ asset('assets/#') }}" class="close-popup" data-popup=".popup-login"><img src="{{ asset('assets/images/icons/black/menu_close.png') }}" alt="" title="" /></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Popup -->
-    <div class="popup popup-signup">
-        <div class="content-block">
-            <h4>REGISTER</h4>
-            <div class="loginform">
-                <form id="RegisterForm" method="post">
-                    <input type="text" name="Username" value="" class="form_input required" placeholder="Username" />
-                    <input type="text" name="Email" value="" class="form_input required" placeholder="Email" />
-                    <input type="password" name="Password" value="" class="form_input required" placeholder="Password" />
-                    <input type="submit" name="submit" class="form_submit" id="submitregister" value="SIGN UP" />
-                </form>
-		<h5>- OR REGISTER WITH A SOCIAL ACCOUNT -</h5>
-		<div class="signup_social">
-			<a href="http://www.facebook.com/" class="signup_facebook">FACEBOOK</a>
-			<a href="http://www.twitter.com/" class="signup_twitter">TWITTER</a>            
-		</div>		
-            </div>
-            <div class="close_popup_button">
-                <a href="#" class="close-popup" data-popup=".popup-signup"><img src="{{ asset('assets/images/icons/black/menu_close.png') }}" alt="" title="" /></a>
-            </div>
-        </div>
-    </div>
-	
-    <!-- Forgot Password Popup -->
-    <div class="popup popup-forgot">
-        <div class="content-block">
-            <h4>FORGOT PASSWORD</h4>
-            <div class="loginform">
-                <form id="ForgotForm" method="post">
-                    <input type="text" name="Email" value="" class="form_input required" placeholder="email" />
-                    <input type="submit" name="submit" class="form_submit" id="submitforgot" value="RESEND PASSWORD" />
-                </form>
-                <div class="signup_bottom">
-                    <p>Check your email and follow the instructions to reset your password.</p>
-                </div>
-            </div>
-            <div class="close_popup_button">
-                <a href="{{ asset('assets/#') }}" class="close-popup" data-popup=".popup-forgot"><img src="{{ asset('assets/images/icons/black/menu_close.png') }}" alt="" title="" /></a>
-            </div>
-        </div>
-    </div>
+   
 	
     <!-- Social Icons Popup -->
     <div class="popup popup-social">

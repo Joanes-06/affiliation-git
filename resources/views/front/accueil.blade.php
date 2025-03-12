@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
 <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
-<title>blix - mobile template</title>
+<title>VISIBILITY - mobile template</title>
 <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
@@ -134,7 +134,7 @@
 			
 			    <div class="navbarpages">
 					<div class="navbar_left">
-						<div class="logo_text"><a href="{{ asset('assets/index.html') }}">BLIX</a></div>
+						<div class="logo_text"><a href="{{ asset('assets/index.html') }}"><img src="{{asset('assets/images/Sans titre-2.png')}}" alt=""></a></div>
 					</div>
 					
                 </div>
@@ -146,8 +146,8 @@
                       <div class="swiper-slide" style="background-image:url('{{ asset('assets/images/SL1.jpg') }}');">
 		     <div class="slider_trans">
 			 <div class="slider-caption">
-                <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR BLIX</span>
-                <h2 data-swiper-parallax="-100%">BOOSTEZ VOTRE RÉSEAU !</h2>
+                <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR VISIBILITY</span>
+                <h2 data-swiper-parallax="-100%" style="margin-top: 10px">BOOSTEZ VOTRE RÉSEAU !</h2>
                 
                 <p data-swiper-parallax="-30%">Accédez à des contacts exclusifs et des formations enrichissantes. Gagnez 50 % sur chaque parrainage !</p>
            </div>
@@ -156,8 +156,8 @@
                       <div class="swiper-slide" style="background-image:url('{{ asset('assets/images/SL2.jpg') }}');">
 			<div class="slider_trans">		  
 				<div class="slider-caption">
-                    <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR BLIX</span>
-                    <h2 data-swiper-parallax="-100%">GAGNEZ JUSQU'À 50 % PAR PARRAINAGE !</h2>
+                    <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR VISIBILITY</span>
+                    <h2 data-swiper-parallax="-100%" style="margin-top: 10px">GAGNEZ JUSQU'À 50 % PAR PARRAINAGE !</h2>
                     
                     <p data-swiper-parallax="-30%">Invitez vos amis et touchez des commissions sur 5 générations !</p>
                     </div>	
@@ -166,8 +166,8 @@
                       <div class="swiper-slide" style="background-image:url('{{ asset('assets/images/SL3.jpg') }}');">
 			<div class="slider_trans">		  
 				<div class="slider-caption">
-                    <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR BLIX</span>
-                    <h2 data-swiper-parallax="-100%">CHOISISSEZ VOTRE PACK MAINTENANT !</h2>
+                    <span class="subtitle" data-swiper-parallax="-60%">BIENVENUE SUR VISIBILITY</span>
+                    <h2 data-swiper-parallax="-100%" style="margin-top: 10px">CHOISISSEZ VOTRE PACK MAINTENANT !</h2>
                     
                     <p data-swiper-parallax="-30%">Profitez de nos packs avantageux : contacts premium, formations variées et gains sur parrainage !</p>
                         </div>
@@ -183,7 +183,7 @@
 			<div class=""></div>
 			<div class="">
 			  <div class="swiper-slide toolbar-icon">
-				<a href="#" data-popup=".popup-signup" class="open-popup"><img src="{{ asset('assets/images/icons/blue/users.png') }}" alt="" title="" /><span>INSCRIPTION</span></a>
+				<a href="{{route('register')}}"><img src="{{ asset('assets/images/icons/blue/users.png') }}" alt="" title="" /><span>INSCRIPTION</span></a>
 			        <a href="#" data-popup=".popup-login" class="open-popup"><img src="{{ asset('assets/images/icons/blue/user.png') }}" alt="" title="" /><span>CONNEXION</span></a>
 				<a href="#" data-popup=".popup-plan" class="open-popup"><img src="{{ asset('assets/images/icons/blue/more.png') }}" alt="" title="" /><span>PACK DISPONIBLE</span></a>
 				<a href="#" data-popup=".popup-temoignage" class="open-popup"><img src="{{ asset('assets/images/icons/blue/temoignage.png') }}" alt="" title="" /><span>TÉMOIGNAGE</span></a>
@@ -206,7 +206,7 @@
     <!-- Login Popup -->
     <div class="popup popup-login">
         <div class="content-block">
-            <h4>BLIX</h4>
+            <h4>VISIBILITY</h4>
             <h3>Se connecter</h3>
             <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
             <div class="loginform">
@@ -229,17 +229,18 @@
  <!-- Register Popup -->
  <div class="popup popup-signup">
     <div class="content-block">
-      <h4>BLIX</h4>
+      <h4>VISIBILITY</h4>
       <h3>Inscription</h3>
       <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
         <div class="loginform">
-            <form id="RegisterForm" method="post">
-                <input type="text" name="Username" value="" class="form_input required" placeholder="Nom et prénom" />
-                <input type="text" name="Email" value="" class="form_input required" placeholder="Email" />
-                <input type="password" name="Password" value="" class="form_input required" placeholder="Mot de de passe" />
-                <input type="password" name="Password" value="" class="form_input required" placeholder="Confirmez le mot de de passe" />
-                <input type="tel" id="phone" name="phone" class="form_input required" placeholder="Entrez votre numéro">
-                <input type="text" name="Ville" id="ville" class="form_input required" placeholder="Ville"  />
+            <form id="RegisterForm" method="post" action="{{ route('register') }}">
+                @csrf
+                <input type="text" name="Username" value="" class="form_input " placeholder="Nom et prénom" />
+                <input type="text" name="Email" value="" class="form_input " placeholder="Email" />
+                <input type="password" name="Password" value="" class="form_input " placeholder="Mot de de passe" />
+                <input type="password" name="Password" value="" class="form_input " placeholder="Confirmez le mot de de passe" />
+                <input type="tel" id="phone" name="phone" class="form_input " placeholder="Entrez votre numéro">
+                <input type="text" name="Ville" id="ville" class="form_input " placeholder="Ville"  />
                 <input type="text" name="CodeParrain" id="code-parrain" class="form_input" placeholder="Code Parrain (Si vous en avez)" />
                 <input type="submit" name="submit" class="form_submit" id="submitregister" value="S'INSCRIRE" />
             </form>	

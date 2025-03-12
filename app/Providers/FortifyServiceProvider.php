@@ -12,16 +12,14 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-
+use App\Http\Responses\CustomRegisterViewResponse;
+use Laravel\Fortify\Contracts\RegisterViewResponse;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
-        //
-    }
+    
 
     /**
      * Bootstrap any application services.
@@ -32,6 +30,8 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+        Fortify::redirects('register', '/plan'); // Redirection après inscription
+        
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
@@ -43,4 +43,10 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
     }
+
+    public function register(): void
+{
+    $this->app->singleton(RegisterViewResponse::class, CustomRegisterViewResponse::class);
+}
+
 }

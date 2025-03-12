@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laraveljo</title>
+
+        <title>Laravel - jo</title>
+
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,6 +30,7 @@
                             href="{{ url('/dashboard') }}"
                             class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal"
                         >
+
                             Dashboard boss
                         </a>
                     @else
@@ -35,14 +38,15 @@
                             href="{{ route('login') }}"
                             class="inline-block px-5 py-1.5 text-[#1b1b18] border border-transparent hover:border-[#19140035] rounded-sm text-sm leading-normal"
                         >
-                            Log in
+                            Se connecter
                         </a>
 
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
                                 class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal">
-                                Register
+                                S'inscrire
+
                             </a>
                         @endif
                     @endauth

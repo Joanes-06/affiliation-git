@@ -12,14 +12,21 @@ use Illuminate\Support\Facades\Schema;
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name'); // Ajout du prénom
-            $table->string('last_name'); // Ajout du nom de famille
+            $table->string('lastname');
+            $table->string('firstname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('whatsapp_number')->nullable(); // Ajout du numéro WhatsApp (nullable si optionnel)
-            $table->string('city')->nullable(); // Ajout de la ville (nullable si optionnel)
-            $table->string('sponsor_code')->nullable(); // Ajout du code sponsor (nullable si optionnel)
+            $table->string('phone')->nullable();
+            $table->string('ville')->nullable();
+            $table->string('code_promo')->unique()->nullable();
+            $table->unsignedBigInteger('inviteur_id')->nullable();
+            $table->unsignedBigInteger('generation1_id')->nullable();
+            $table->unsignedBigInteger('generation2_id')->nullable();
+            $table->json('last_vcard_downloads')->nullable(); // Ajout de cette colonne
+            $table->foreign('inviteur_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('generation1_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('generation2_id')->references('id')->on('users')->onDelete('set null');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
