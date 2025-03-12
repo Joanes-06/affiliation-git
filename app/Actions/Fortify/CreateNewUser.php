@@ -19,7 +19,7 @@ class CreateNewUser implements CreatesNewUsers
             'Firstname' => ['required', 'string', 'max:255'],
             'Email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'Password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:255', 'regex:/^\+[0-9]{1,3}\s?[0-9]{3,15}$/'],
             'Ville' => ['required', 'string', 'max:100'],
             'code_promo' => ['nullable', 'string', 'exists:users,code_promo'],
         ];
@@ -47,6 +47,7 @@ class CreateNewUser implements CreatesNewUsers
             'phone.required' => 'Le numéro de téléphone est requis.',
             'phone.string' => 'Le numéro de téléphone doit être une chaîne de caractères.',
             'phone.max' => 'Le numéro de téléphone ne doit pas dépasser 20 caractères.',
+            'phone.regex' => 'Veuillez entrer l’indicatif de votre pays (ex. : **+226** pour le **Burkina Faso**).',
     
             'Ville.required' => 'La ville est requise.',
             'Ville.string' => 'La ville doit être une chaîne de caractères.',

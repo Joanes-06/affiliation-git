@@ -1,119 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
-<link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
-<title>blix - mobile template</title>
-<link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet"> 
-<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
-@livewireStyles
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
+    <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
+    <title>blix - mobile template</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet"> 
+    <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+    @livewireStyles
 
 </head>
 <body id="mobile_wrap">
 
     <div class="panel-overlay"></div>
-
-    <div class="panel panel-left panel-reveal">
-                  <!-- Slider -->
-                 <div class="swiper-container-subnav multinav">
-                    <div class="swiper-wrapper">
-			<div class="swiper-slide">		
-				<nav class="main_nav_underline">
-				<ul>
-				<li><a href="{{ asset('assets/index.html') }}"><img src="{{ asset('assets/images/icons/white/home.png') }}" alt="" title="" /><span>Home</span></a></li>
-				<li><a href="{{ asset('assets/about.html') }}"><img src="{{ asset('assets/images/icons/white/mobile.png') }}" alt="" title="" /><span>About</span></a></li>
-				<li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/features.png') }}" alt="" title="" /><span>Features</span></a></li>
-				
-				<li><a href="{{ asset('assets/#') }}" data-popup=".popup-login" class="open-popup"><img src="{{ asset('assets/images/icons/white/lock.png') }}" alt="" title="" /><span>Login</span></a></li>
-				<li><a href="{{ asset('assets/team.html') }}"><img src="{{ asset('assets/images/icons/white/users.png') }}" alt="" title="" /><span>Team</span></a></li>
-				<li><a href="{{ asset('assets/blog.html') }}"><img src="{{ asset('assets/images/icons/white/blog.png') }}" alt="" title="" /><span>Blog</span></a></li>		
-
-				<li><a href="{{ asset('assets/photos.html') }}"><img src="{{ asset('assets/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
-				<li><a href="{{ asset('assets/videos.html') }}"><img src="{{ asset('assets/images/icons/white/video.png') }}" alt="" title="" /><span>Videos</span></a></li>
-				<li><a href="{{ asset('assets/music.html') }}"><img src="{{ asset('assets/images/icons/white/music.png') }}" alt="" title="" /><span>Music</span></a></li>
-				
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/shop.png') }}" alt="" title="" /><span>Shop</span></a></li>
-				<li class="subnav opensubnav"><img src="{{ asset('assets/images/icons/white/categories.png') }}" alt="" title="" /><span>Sub level menu</span></li>
-				<li><a href="{{ asset('assets/cart.html') }}"><img src="{{ asset('assets/images/icons/white/cart.png') }}" alt="" title="" /><span>Cart</span></a></li>
-				
-				<li><a href="{{ asset('assets/tables.html') }}"><img src="{{ asset('assets/images/icons/white/tables.png') }}" alt="" title="" /><span>Tables</span></a></li>
-				
-				<li><a href="{{ asset('assets/form.html') }}"><img src="{{ asset('assets/images/icons/white/form.png') }}" alt="" title="" /><span>Custom Form</span></a></li>
-				
-				
-				<li><a href="{{ asset('assets/tel:012345678') }}"><img src="{{ asset('assets/images/icons/white/phone.png') }}" alt="" title="" /><span>Call now!</span></a></li>
-				<li><a href="{{ asset('assets/contact.html') }}"><img src="{{ asset('assets/images/icons/white/contact.png') }}" alt="" title="" /><span>Contact</span></a></li>
-				</ul>
-				</nav>
-			</div>	
-			<div class="swiper-slide">		
-				<div class="subnav_header backtonav"><img src="{{ asset('assets/images/icons/white/back.png') }}" alt="" title="" /><span>BACK TO MAIN MENU</span></div>
-				<nav class="main_nav_underline">
-				<ul>
-
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/car.png') }}" alt="" title="" /><span>Cars</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/bus.png') }}" alt="" title="" /><span>Buses</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/bike.png') }}" alt="" title="" /><span>Bikes</span></a></li>
-				
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/drink.png') }}" alt="" title="" /><span>Drinks</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/food.png') }}" alt="" title="" /><span>Food</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/orders.png') }}" alt="" title="" /><span>Clothes</span></a></li>
-				
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/rocket.png') }}" alt="" title="" /><span>Rockets</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/briefcase.png') }}" alt="" title="" /><span>Accessories</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/gift.png') }}" alt="" title="" /><span>Gifts</span></a></li>
-				<li class="subnav opensubsubnav"><img src="{{ asset('assets/images/icons/white/categories.png') }}" alt="" title="" /><span>Third sublevel menu</span></li>
-				</ul>
-				</nav>
-			</div>
-			<div class="swiper-slide">		
-				<div class="subnav_header backtosubnav"><img src="{{ asset('assets/images/icons/white/back.png') }}" alt="" title="" /><span>BACK TO 2 SUBLEVEL MENU</span></div>
-				<nav class="main_nav_underline">
-				<ul>
-
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/car.png') }}" alt="" title="" /><span>Subcategory 01</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/bus.png') }}" alt="" title="" /><span>Subcategory 02</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/bike.png') }}" alt="" title="" /><span>Subcategory 03</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/drink.png') }}" alt="" title="" /><span>Subcategory 04</span></a></li>
-				<li><a href="{{ asset('assets/shop.html') }}"><img src="{{ asset('assets/images/icons/white/food.png') }}" alt="" title="" /><span>Subcategory 05</span></a></li>
-
-				
-				</ul>
-				</nav>
-			</div>
-		    </div>
-		</div>
-    </div>
-
-    <div class="panel panel-right panel-reveal">
-      <div class="user_login_info">
-	  
-                <div class="user_thumb">
-                <img src="{{ asset('assets/images/page_photo.jpg') }}" alt="" title="" />
-                  <div class="user_details">
-                   <p>Welcome, <span>Nathalie</span></p>
-                  </div>  
-                  <div class="user_avatar"><img src="{{ asset('assets/images/avatar.jpg') }}" alt="" title="" /></div>       
-                </div>
-				
-                  <nav class="user-nav">
-                    <ul>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/settings.png') }}" alt="" title="" /><span>Account Settings</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/briefcase.png') }}" alt="" title="" /><span>My Account</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong>12</strong></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/love.png') }}" alt="" title="" /><span>Favorites</span><strong>5</strong></a></li>
-                      <li><a href="{{ asset('assets/index.html') }}"><img src="{{ asset('assets/images/icons/white/lock.png') }}" alt="" title="" /><span>Logout</span></a></li>
-                    </ul>
-                  </nav>
-      </div>
-    </div>
 
     <div class="views">
 
@@ -121,31 +26,29 @@
 	  
 <div class="pages">
   <div data-page="about" class="page no-toolbar no-navbar">
-    <div class="page-content">
+      <!-- En-tête Premium -->
+      <header class="enTetePremium">
+         <img src="{{asset('assets/images/VISI noir vert.png')}}" alt="Logo" class="logoEntreprise">
+         
+         <a href="{{ route('logout') }}" class="boutonRetour" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Deconnexion
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+     </header>
+
+    <div class="page-content" >
     
-	<div class="navbarpages navbarpagesbg">
-                            <div class="navbar_left">
-                                <div class="logo_text"><a href="{{ asset('assets/index.html') }}">BLIX</a></div>
-                            </div>
-			   			
-	</div>
-						
-     <div id="pages_maincontent">
+	
       
-          <h2 class="page_title">PLAN D'ABONNEMENT</h2>
-          @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-			  
-                  <!-- Slider -->
-                 	  
-                  @livewire('navigation-menu')
-
-	<div class="page_single layout_fullwidth_padding">	
-	  
+        <!-- Slider -->
+        
+        
+        <div class="page_single layout_fullwidth_padding">	
+            <div class="content-bl">
+            <div class="top-title">
+              <h3>PLAN D'ABONNEMENT</h3>
+          </div>
               <blockquote>
                 Accédez à des fichiers de contacts et à des formations exclusives selon votre abonnement. Choisissez votre pack et développez votre réseau !                         </blockquote>
                 <section class="sectionCartes">
@@ -270,21 +173,20 @@
                 </section>
                 
              
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('contacts.index') }}">
+        
+               {{--  <a class="nav-link" href="{{ route('contacts.index') }}">
                     <i class="fas fa-address-book"></i> Télécharger contacts
-                </a>
-            </li>
-              <a href="{{ asset('assets/index.html') }}" class="button_full btyellow">Revenir à l'accueil</a>
-
-           
+                </a> --}}
+            
+          
 			  
 			  
 			  
 			  
          </div>
+         </div>
       
-      </div>
+      
       
       
     </div>
@@ -293,50 +195,7 @@
          </div>
     </div>
 
-    <!-- Login Popup -->
-    <div class="popup popup-login">
-        <div class="content-block">
-            <h4>LOGIN</h4>
-            <div class="loginform">
-                <form id="LoginForm" method="post">
-                    <input type="text" name="Username" value="" class="form_input required" placeholder="username" />
-                    <input type="password" name="Password" value="" class="form_input required" placeholder="password" />
-                    <div class="forgot_pass"><a href="{{ asset('assets/#') }}" data-popup=".popup-forgot" class="open-popup">Forgot Password?</a></div>
-                    <input type="submit" name="submit" class="form_submit" id="submit" value="SIGN IN" />
-                </form>
-                <div class="signup_bottom">
-                    <p>Don't have an account?</p>
-                    <a href="{{ asset('assets/#') }}" data-popup=".popup-signup" class="open-popup">SIGN UP</a>
-                </div>
-            </div>
-            <div class="close_popup_button">
-                <a href="{{ asset('assets/#') }}" class="close-popup" data-popup=".popup-login"><img src="{{ asset('assets/images/icons/black/menu_close.png') }}" alt="" title="" /></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Popup -->
-    <div class="popup popup-signup">
-        <div class="content-block">
-            <h4>REGISTER</h4>
-            <div class="loginform">
-                <form id="RegisterForm" method="post">
-                    <input type="text" name="Username" value="" class="form_input required" placeholder="Username" />
-                    <input type="text" name="Email" value="" class="form_input required" placeholder="Email" />
-                    <input type="password" name="Password" value="" class="form_input required" placeholder="Password" />
-                    <input type="submit" name="submit" class="form_submit" id="submitregister" value="SIGN UP" />
-                </form>
-		<h5>- OR REGISTER WITH A SOCIAL ACCOUNT -</h5>
-		<div class="signup_social">
-			<a href="http://www.facebook.com/" class="signup_facebook">FACEBOOK</a>
-			<a href="http://www.twitter.com/" class="signup_twitter">TWITTER</a>            
-		</div>		
-            </div>
-            <div class="close_popup_button">
-                <a href="{{ asset('assets/#') }}" class="close-popup" data-popup=".popup-signup"><img src="{{ asset('assets/images/icons/black/menu_close.png') }}" alt="" title="" /></a>
-            </div>
-        </div>
-    </div>
+    
 	
     <!-- Forgot Password Popup -->
     <div class="popup popup-forgot">
