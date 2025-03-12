@@ -16,10 +16,11 @@ Route::get('/mon-parrainage', function () {
 })->middleware('auth');
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/accueil', function () {
     return view('front.accueil');
+});
+
+Route::get('/contact', function () {
+    return view('front.contact');
 });
 Route::get('/plan', function () {
     return view('front.plan');
