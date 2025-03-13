@@ -14,6 +14,12 @@ COPY . .
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Installer Composer manuellement avec des permissions correctes
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Installer les dépendances sans interaction
+RUN composer install --no-dev --prefer-dist --no-progress --no-interaction
+
 # Installer les dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
 
