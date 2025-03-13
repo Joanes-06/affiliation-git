@@ -9,21 +9,25 @@ RUN apt-get update && apt-get install -y \
 # Installer Composer proprement
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Installer Node.js 20 et NPM
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm
-
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier les fichiers du projet dans le conteneur
-COPY . .
+# Copier uniquement composer.json et composer.lock avant installation
+COPY composer.json composer.lock ./
+
+# Nettoyer le cache Composer
+RUN composer clear-cache
 
 # Installer les dépendances PHP avec Composer
-RUN composer install --no-dev --prefer-dist --no-progress --no-interaction --optimize-autoloader
+RUN composer install --no-dev --prefer-dist --no-progress --no-interaction --optimize-autoloader || composer update --no-dev --prefer-dist --no-progress --no-interaction
 
-# Compiler les assets (si applicable)
+# Copier le reste du projet
+COPY . .
+
+# Vérifier les extensions installées
+RUN php -m
+
+# Compiler les assets si applicable
 RUN if [ -f package.json ]; then npm install && npm run build; fi
 
 # Donner les permissions correctes
