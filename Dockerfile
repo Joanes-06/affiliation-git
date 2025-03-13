@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
 # Installer Composer proprement
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Installer Node.js et NPM (si nécessaire pour Laravel Mix)
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+# Installer Node.js 20 et NPM
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm
 
@@ -30,7 +30,7 @@ RUN if [ -f package.json ]; then npm install && npm run build; fi
 RUN chmod -R 775 storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
-# Exposer le port que Render définit dynamiquement
+# Exposer le port défini dynamiquement par Render
 EXPOSE 8000
 
 # Lancer Laravel avec la bonne variable de port
