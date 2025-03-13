@@ -14,6 +14,13 @@ return [
     |
     */
 
+   'fedapay' => [
+    'secret' => env('FEDAPAY_SECRET_KEY'),
+    'public' => env('FEDAPAY_PUBLIC_KEY'),
+    'mode' => env('FEDAPAY_MODE', 'sandbox'), // 'live' pour la production
+],
+
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\SouscriptionController;
 use JeroenDesloovere\VCard\VCard;
 
 use Illuminate\Support\Facades\Route;
@@ -16,20 +18,23 @@ Route::get('/mon-parrainage', function () {
 })->middleware('auth');
 
 Route::get('/', function () {
-
-    return view('welcome');
-});
-Route::get('/accueil', function () {
     return view('front.accueil');
+});
+
+Route::get('/contact', function () {
+    return view('front.contact');
 });
 Route::get('/plan', function () {
     return view('front.plan');
 })->name('front.plan');
-Route::get('/dashboard_accueil', function () {
-    return view('front.dashboard_accueil');
-});
-Route::get('/dashboard_accueil', function () {
-    return view('front.dashboard_accueil');
+
+
+Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
+Route::get('/dashboard-accueil', [SouscriptionController::class, 'index'])->name('dashboard_accueil');
+
+
+Route::get('/okk', function () {
+    return view('preview');
 });
 
 Route::get('/invite/{code}', function ($code) {

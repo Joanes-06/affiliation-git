@@ -3,80 +3,92 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui">
-    <title>Login - BLIX</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
+    <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
+    <title>CONNEXION</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body id="mobile_wrap">
-
-    <div class="panel-overlay"></div>
-
-    <div class="panel panel-left panel-reveal">
-        <!-- Slider -->
-        <div class="swiper-container-subnav multinav">
-            <div class="swiper-wrapper">
-                <!-- Your navigation content here -->
-            </div>
-        </div>
-    </div>
-
-    <div class="panel panel-right panel-reveal">
-        <div class="user_login_info">
-            <!-- User login info content here -->
-        </div>
-    </div>
-
+    <!-- Main Content -->
     <div class="views">
         <div class="view view-main">
             <div class="pages">
                 <div data-page="about" class="page no-toolbar no-navbar">
+
+                    <header class="enTetePremium">
+                        <img src="{{asset('assets/images/VISI noir vert.png')}}" alt="Logo" class="logoEntreprise">
+                        
+                        <a href="{{ route('logout') }}" class="boutonRetour" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Deconnexion
+                       </a>
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form>
+                    </header>
+
                     <div class="page-content">
-                        <div class="navbarpages navbarpagesbg">
-                            <div class="navbar_left">
-                                <div class="logo_text"><a href="{{ asset('assets/index.html') }}">BLIX</a></div>
-                            </div>
-                        </div>
-
-                        <div id="pages_maincontent">
-                            <h2 class="page_title">CONNEXION</h2>
-
-                            <div class="page_single layout_fullwidth_padding">
-                                <div class="content-block">
-                                    <h4>BLIX</h4>
-                                    <h3>Se connecter</h3>
-                                    <p>Créez un compte pour développer votre réseau et augmenter vos revenus.</p>
+                        <div class="page_single layout_fullwidth_padding ">
+                            <div class="content-block">
+                                <div class="mp">
+                                  
+                                    <div class="top-register">
+                                        <h3>CONNEXION</h3>
+                                        <p>Connectez-vous pour accéder à votre compte.</p>
+                                    </div>
+                                </div>
+                                <div class="loginform">
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
 
-                                        <div>
-                                            <label for="email">Email</label>
-                                            <input id="email" class="form_input required" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                        </div>
-
+                                        <!-- Champ Email -->
                                         <div class="mt-4">
-                                            <label for="password">Mot de passe</label>
-                                            <input id="password" class="form_input required" type="password" name="password" required autocomplete="current-password" />
+                                            <x-label for="email" value="{{ __('Email') }}" />
+                                            <x-input id="email" class="form_input" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Email" />
+                                            @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
-                                        <div class="block mt-4">
-                                            <label for="remember_me" class="flex items-center">
-                                                <input type="checkbox" id="remember_me" name="remember" />
-                                                <span class="ms-2 text-sm text-gray-600">Se souvenir de moi</span>
-                                            </label>
+                                        <!-- Champ Mot de passe -->
+                                        <div class="mt-4">
+                                            <x-label for="password" value="{{ __('Mot de passe') }}" />
+                                            <x-input id="password" class="form_input" type="password" name="password" required autocomplete="current-password" placeholder="Mot de passe" />
+                                            @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
-                                        <div class="flex items-center justify-end mt-4">
-                                            @if (Route::has('password.request'))
-                                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                                                    Mot de passe oublié?
-                                                </a>
-                                            @endif
-
-                                            <button type="submit" class="form_submit">
-                                                Se connecter
-                                            </button>
+                                        <!-- Bouton de connexion -->
+                                        <div>
+                                            <x-button class="btn-custom">
+                                                {{ __("CONNEXION") }}
+                                            </x-button>
                                         </div>
+                             
+                                        <!-- ... -->
+                                        <div>
+                                            <a class="deja" href="{{ route('register') }}">
+                                                {{ __('Pas encore inscrit ? Inscrivez-vous') }}
+                                            </a>
+                                        </div>
+
+                                        <div class="espacement-haut">
+                                            <x-label for="conditions">
+                                                <div class="conteneur-flex">
+                                                   
+                                                    <div class=""> 
+                                                        <a href="{{ route('password.request') }}" >
+                                                            {{ __('Mot de passe oublié ?') }}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </x-label>
+                                        </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -87,6 +99,8 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.min.js') }}"></script>
