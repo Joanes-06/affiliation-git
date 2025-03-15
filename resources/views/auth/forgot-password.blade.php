@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
     <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
-    <title>CONNEXION</title>
+    <title>MOT DE PASSE OUBLIÉ</title>
     <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
