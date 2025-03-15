@@ -16,9 +16,9 @@ Route::get('/verify-code', function () {
 Route::post('/verify-code', [PasswordResetController::class, 'verifyCode'])->name('password.verify.code');
 
 // Route pour afficher le formulaire de réinitialisation du mot de passe
-Route::get('/reset-password', function () {
-    return view('auth.reset-password');
-})->name('password.reset.form');
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::get('/reset-password', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+Route::post('/reset', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 
 Route::get('/mon-parrainage', function () {
     $user = Auth::user();
