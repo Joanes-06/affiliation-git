@@ -13,7 +13,14 @@ class PasswordResetController extends Controller
     public function sendResetLink(Request $request)
     {
         // Validation de l'e-mail
-        $request->validate(['email' => 'required|email|exists:users,email']);
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], [
+            'email.required' => 'L\'adresse email est obligatoire.',
+            'email.email' => 'Veuillez entrer une adresse email valide.',
+            'email.exists' => 'Aucun compte ne correspond à cet email.',
+        ]);
+        
         
         // Génération d'un code de réinitialisation à 6 chiffres
         $code = random_int(100000, 999999);
@@ -29,7 +36,12 @@ class PasswordResetController extends Controller
     public function verifyCode(Request $request)
     {
         // Validation du code
-        $request->validate(['code' => 'required']);
+        $request->validate([
+            'code' => 'required',
+        ], [
+            'code.required' => 'Le code est obligatoire.',
+        ]);
+        
         
         // Vérification du code (logique à ajouter)
         // Si le code est correct, rediriger vers la page de réinitialisation du mot de passe
@@ -52,7 +64,16 @@ class PasswordResetController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email',
             'password' => 'required|min:8|confirmed',
+        ], [
+            'email.required' => 'L\'adresse email est obligatoire.',
+            'email.email' => 'Veuillez entrer une adresse email valide.',
+            'email.exists' => 'Aucun compte ne correspond à cet email.',
+            
+            'password.required' => 'Le mot de passe est obligatoire.',
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
+        
 
         // Mise à jour du mot de passe de l'utilisateur
         $user = User::where('email', $request->email)->first();
