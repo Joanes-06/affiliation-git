@@ -25,7 +25,9 @@
                 <div class="user_thumb">
                 <img src="{{ asset('assets/images/abonné.jpg') }}" alt="" title="" />
                   <div class="user_details">
+
                    <p>Bienvenue, <span>l'equipe GBAYE</span></p>
+                   
                   </div>  
                   <div class="user_avatar"><img src="{{ asset('assets/images/profil.jpg') }}" alt="" title="" /></div>       
                 </div>

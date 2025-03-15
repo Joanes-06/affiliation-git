@@ -2,12 +2,13 @@
 
 namespace App\Actions\Fortify;
 
+use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Laravel\Jetstream\Jetstream;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Storage;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -76,6 +77,25 @@ class CreateNewUser implements CreatesNewUsers
             'generation1_id' => $parrainageInfo['generation1_id'] ?? null,
             'generation2_id' => $parrainageInfo['generation2_id'] ?? null,
         ]);
+
+        // Générer le fichier VCF
+        $this->generateVCFFile($user);
+
+        return $user;
+    }
+
+    private function generateVCFFile(User $user)
+    {
+        $vcfContent = "BEGIN:VCARD\n";
+        $vcfContent .= "VERSION:3.0\n";
+        $vcfContent .= "FN:" . $user->first_name . " " . $user->last_name . " BLIX\n";
+        $vcfContent .= "N:" . $user->last_name . ";" . $user->first_name . ";;;\n";
+        $vcfContent .= "TEL;TYPE=CELL,VOICE:" . $user->whatsapp_number . "\n";
+        $vcfContent .= "END:VCARD\n";
+
+        // Stocker le fichier VCF avec un nom unique
+        $filename = 'contacts/' . $user->id . '_' . now()->format('YmdHis') . '.vcf';
+        Storage::put($filename, $vcfContent);
     }
     
     /**
