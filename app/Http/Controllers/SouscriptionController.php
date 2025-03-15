@@ -55,17 +55,27 @@ class SouscriptionController extends Controller
                 
     
                 if ($user) {
-                    // Enregistrer la souscription
-                    $souscription = new Souscription();
-                    $souscription->user_id = $user->id;
-                    $souscription->amount = $transaction->amount;
-                    $souscription->description = $transaction->description;
-                    $souscription->currency = 'XOF'; // Utilisez la devise appropriée
-                    $souscription->status = 'successful';
-                    $souscription->save();
+                // Annuler l'ancienne souscription si elle existe
+                $ancienneSouscription = Souscription::where('user_id', $user->id)
+                                                    ->where('status', 'successful')
+                                                    ->first();
+                if ($ancienneSouscription) {
+                    $ancienneSouscription->status = 'canceled'; // Mettre à jour le statut de l'ancienne souscription
+                    $ancienneSouscription->save();
+                }
+
+                // Enregistrer la nouvelle souscription
+                $souscription = new Souscription();
+                $souscription->user_id = $user->id;
+                $souscription->amount = $transaction->amount;
+                $souscription->description = $transaction->description;
+                $souscription->currency = 'XOF'; // Utilisez la devise appropriée
+                $souscription->status = 'successful';
+                $souscription->save();
+
     
                     // Redirection GET explicite
-                    return response()->redirectTo(route('dashboard_accueil'))
+                    return response()->redirectTo(route('home'))
                                     ->with('success', 'Souscription réussie!');
                 } else {
                     Log::error('Utilisateur non trouvé pour l\'email: ' . $customerEmail);

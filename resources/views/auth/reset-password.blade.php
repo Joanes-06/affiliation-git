@@ -1,36 +1,32 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui">
+    <title>Réinitialisation du mot de passe</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Réinitialisation du mot de passe</h3>
+        <p>Veuillez entrer votre nouveau mot de passe.</p>
 
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.reset') }}">
             @csrf
 
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <div>
+                <label for="password">Nouveau mot de passe</label>
+                <input id="password" type="password" name="password" required>
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div>
+                <label for="password_confirmation">Confirmer le mot de passe</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required>
             </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+            <div>
+                <button type="submit">Réinitialiser le mot de passe</button>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+</body>
+</html>
