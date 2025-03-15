@@ -184,7 +184,7 @@
 			<div class="">
 			  <div class="swiper-slide toolbar-icon">
 				<a href="{{route('register')}}"><img src="{{ asset('assets/images/icons/blue/users.png') }}" alt="" title="" /><span>INSCRIPTION</span></a>
-			        <a href="#" data-popup=".popup-login" class="open-popup"><img src="{{ asset('assets/images/icons/blue/user.png') }}" alt="" title="" /><span>CONNEXION</span></a>
+			        <a href="{{route('login')}}"><img src="{{ asset('assets/images/icons/blue/user.png') }}" alt="" title="" /><span>CONNEXION</span></a>
 				<a href="#" data-popup=".popup-plan" class="open-popup"><img src="{{ asset('assets/images/icons/blue/more.png') }}" alt="" title="" /><span>PACK DISPONIBLE</span></a>
 				<a href="#" data-popup=".popup-temoignage" class="open-popup"><img src="{{ asset('assets/images/icons/blue/temoignage.png') }}" alt="" title="" /><span>TÉMOIGNAGE</span></a>
 				<a href="#" data-popup=".popup-faq" class="open-popup"><img src="{{ asset('assets/images/icons/blue/features.png') }}" alt="" title="" /><span>FAQ</span></a>

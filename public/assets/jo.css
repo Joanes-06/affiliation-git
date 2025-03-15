@@ -643,80 +643,83 @@ input:checked + .curseur:before {
         font-weight: bold;
     }
 
-    /* Lien de parrainage et bouton style image */
+   /* Lien de parrainage et bouton style image */
+.zmv23q {
+    position: relative;
+    margin-bottom: 30px;
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.yxb67n {
+    background-color: #18ba1a;
+    color: #FFFFFF;
+    border: none;
+    height: 100%;
+    padding: 0 25px 0 10%;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+    width: 50%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%); /* Oblique inversée */
+}
+
+.wut89q {
+    flex-grow: 1;
+    height: 100%;
+    padding: 0 20px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    color: #333;
+    position: relative;
+    z-index: 0;
+    margin-left: -10%; /* Ajustez cette valeur pour masquer une partie du lien */
+}
+
+/* Pour s'assurer que le design est responsive */
+@media (max-width: 600px) {
     .zmv23q {
-        position: relative;
-        margin-bottom: 30px;
-        border-radius: 100px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        height: 60px;
-        display: flex;
-        align-items: center;
-        background-color: #f5f5f5;
-    }
-
-    .yxb67n {
-        background-color: #18ba1a;
-        color: #FFFFFF;
-        border: none;
-        height: 100%;
-        padding: 0 25px;
-        font-size: 1.1rem;
-        font-weight: 500;
-        cursor: pointer;
-        z-index: 2;
-        width: 50%;
-        text-align: left;
-        border-right: 2px solid rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Poppins", sans-serif;
-    }
-
-    .yxb67n i {
-        margin-right: 10px;
-    }
-
-    .wut89q {
-        flex-grow: 1;
-        height: 100%;
-        padding: 0 20px;
-        font-family: monospace;
-        font-size: 0.9rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        align-items: center;
-        color: #333;
+        flex-direction: column;
+        height: auto;
+        border-radius: 10px;
     }
     
-    /* Pour s'assurer que le design est responsive */
-    @media (max-width: 600px) {
-        .zmv23q {
-            flex-direction: column;
-            height: auto;
-            border-radius: 10px;
-        }
-        
-        .yxb67n {
-            width: 100%;
-            padding: 15px;
-            justify-content: center;
-            border-right: none;
-            border-bottom: 2px solid rgba(0,0,0,0.05);
-        }
-        
-        .wut89q {
-            width: 100%;
-            padding: 15px;
-            font-size: 12px;
-            text-align: center;
-            justify-content: center;
-        }
+    .yxb67n {
+        width: 100%;
+        padding: 15px;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 2px solid rgba(0,0,0,0.05);
+        clip-path: none; /* Retirer la forme oblique sur mobile */
     }
+    
+    .wut89q {
+        width: 100%;
+        padding: 15px;
+        font-size: 12px;
+        text-align: center;
+        justify-content: center;
+        margin-left: 0; /* Réinitialiser la marge sur mobile */
+    }
+}
 
     .text-danger {
         color: red;
@@ -1057,3 +1060,164 @@ input:checked + .curseur:before {
         font-weight: 300;
         color: #ffffff;
     }
+
+    .custom-alert-success {
+        background-color: #18ba1a; /* Couleur de fond */
+        color: #fff; /* Texte en blanc */
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        margin: 20px 0;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    /* Animation d'apparition */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+
+/*     style pour telecharger les mise a jour de fichier */
+
+
+.tt-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.tt-card-header {
+    background-color: #009900;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.tt-card-body {
+    padding: 2rem;
+}
+
+.tt-form-control {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tt-form-control:focus {
+    border-color: #009900;
+    box-shadow: 0 0 0 3px rgba(0, 153, 0, 0.1);
+}
+
+.tt-btn-primary {
+    background-color: #009900;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.tt-btn-primary:hover {
+    background-color: #007700;
+}
+
+.tt-h5 {
+    font-size: 1.5rem; /* Taille de la police */
+    font-weight: 600;  /* Poids de la police */
+    margin-bottom: 1rem; /* Espacement en bas, par exemple */
+    color: #333; /* Couleur du texte */
+}
+
+
+.tt-list-group-item {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+}
+
+.tt-list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+.tt-badge {
+    background-color: #009900;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    color: white;
+}
+
+.tt-alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.tt-alert-danger {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.tt-alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.tt-hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 1.5rem 0;
+}
+
+.tt-text-muted {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .tt-card-header {
+        font-size: 1.25rem;
+        padding: 1.25rem;
+    }
+
+    .tt-card-body {
+        padding: 1.5rem;
+    }
+
+    .tt-form-control {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .tt-btn-primary {
+        padding: 0.5rem 1rem;
+    }
+}

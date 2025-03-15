@@ -83,10 +83,11 @@
 </div>
 
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="custom-alert-success">
         {{ session('success') }}
     </div>
 @endif
+
 
 	
 			<!-- Cartes Solde et Bénéfice -->
@@ -104,13 +105,14 @@
 				</div>
 			</div>
 	
-			<!-- Lien de parrainage et bouton style image -->
-			<div class="zmv23q" id="copyContainer">
-				<button class="yxb67n" id="copyBtn">
-					Copier mon lien
-				</button>
-				<div class="wut89q" id="referralLink">{{ route('register', ['code' => Auth::user()->code_promo]) }}</div>
-			</div>
+		<!-- Lien de parrainage et bouton style image -->
+<div class="zmv23q" id="copyContainer">
+    <button class="yxb67n" id="copyBtn">
+        Copier mon lien
+    </button>
+    <div class="wut89q" id="referralLink">{{ route('register', ['code' => Auth::user()->code_promo]) }}</div>
+</div>
+
 
       <div class="pp">
         <a href="https://wa.me/votrenuméro" class="bouton_whatsapp_unique">

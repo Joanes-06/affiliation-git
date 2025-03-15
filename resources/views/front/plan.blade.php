@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}" />
     <link rel="apple-touch-startup-image" href="{{ asset('assets/images/apple-touch-startup-image-640x920.png') }}">
-    <title>blix - mobile template</title>
+    <title>VISIBILITY - mobile template</title>
     <link rel="stylesheet" href="{{ asset('assets/css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jo.css') }}">
@@ -80,7 +80,7 @@
                                     data-button-text="Souscrire"
                                     data-button-class="boutonInscription"
                                     data-transaction-amount="2000"
-                                    data-transaction-description="Souscription au pack débutant de BLIX"
+                                    data-transaction-description="Souscription au pack débutant de VISIBILITY"
                                     data-currency-iso="XOF"
                                     data-customer-email="{{ Auth::user()->email }}" 
                                     data-customer-firstname="{{ Auth::user()->firstname }}" 
@@ -120,7 +120,7 @@
                                     data-button-text="Souscrire"
                                     data-button-class="boutonInscription"
                                     data-transaction-amount="5000"
-                                    data-transaction-description="Souscription au pack pro de BLIX"
+                                    data-transaction-description="Souscription au pack pro de VISIBILITY"
                                     data-currency-iso="XOF"
                                     data-customer-email="{{ Auth::user()->email }}" 
                                     data-customer-firstname="{{ Auth::user()->firstname }}" 
@@ -160,7 +160,7 @@
                                     data-button-text="Souscrire"
                                     data-button-class="boutonInscription"
                                     data-transaction-amount="10000"
-                                    data-transaction-description="Souscription au pack elite de BLIX"
+                                    data-transaction-description="Souscription au pack elite de VISIBILITY"
                                     data-currency-iso="XOF"
                                     data-customer-email="{{ Auth::user()->email }}" 
                                     data-customer-firstname="{{ Auth::user()->firstname }}" 

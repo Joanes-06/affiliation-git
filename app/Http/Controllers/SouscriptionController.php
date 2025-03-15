@@ -73,10 +73,25 @@ class SouscriptionController extends Controller
                 $souscription->status = 'successful';
                 $souscription->save();
 
-    
                     // Redirection GET explicite
-                    return response()->redirectTo(route('home'))
-                                    ->with('success', 'Souscription réussie!');
+                if (Auth::user()->id == $souscription->user_id) { // Comparaison correcte
+                    $packageName = '';
+                    
+                    // Vérification du package avec le bon opérateur de comparaison (== au lieu de =)
+                    if ($souscription->amount == 2000.00) { // Utilisation de "==" pour comparer
+                        $packageName = '2.000F (plan débutant)';
+                    }
+                    elseif ($souscription->amount == 5000.00) { // Utilisation de "==" pour comparer
+                        $packageName = '5.000F (plan pro)';
+                    }
+                    else {
+                        $packageName = '10.000F (plan élite)';
+                    }
+                }
+
+                return response()->redirectTo(route('home'))
+                                ->with('success', "Votre souscription au pack de {$packageName} est réussie !");
+
                 } else {
                     Log::error('Utilisateur non trouvé pour l\'email: ' . $customerEmail);
                     return response()->redirectTo(route('dashboard'))
