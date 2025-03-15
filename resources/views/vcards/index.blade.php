@@ -35,14 +35,14 @@
 				
                   <nav class="user-nav">
                     <ul>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Code Promo</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" /><span>Tout les contacts</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Code Promo</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" /><span>Tout les contacts</span></a></li>
+                      <li><a href="{{ route('contacts.index') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
                      
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/com.png') }}" alt="" title="" /><span>Rejoindre la communauter</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Rejoindre la formation trading</span></a></li>
-                      <li><a href="{{ asset('assets/features.html') }}"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Marketing</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/com.png') }}" alt="" title="" /><span>Rejoindre la communauter</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Rejoindre la formation trading</span></a></li>
+                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Marketing</span></a></li>
                     </ul>
                   </nav>
                   <nav class="user-navi">

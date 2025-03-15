@@ -67,32 +67,28 @@ class VCardController extends Controller
         $vCard = new VCard();
         
         // Ajouter les informations de l'utilisateur
-        $vCard->addName('', $user->name, '', '', '');
+        $formattedName = $user->lastname . ' ' . $user->firstname . ' (VISIBILITY)';
+
+        $vCard->addName('', $formattedName, '', '', '');
+        
         
         // Formater le numéro de téléphone avec le préfixe "v+"
-        $phoneNumber = 'v+' . preg_replace('/[^0-9]/', '', $user->phone);
+        $phoneNumber = '' . preg_replace('/[^0-9]/', '', $user->phone);
         
         // Ajouter le numéro WhatsApp
         $vCard->addPhoneNumber($phoneNumber, 'WHATSAPP');
-        
-        // Ajouter l'email
-        $vCard->addEmail($user->email);
-        
-        // Ajouter la ville
-        if ($user->ville) {
-            $vCard->addAddress('', '', '', $user->ville, '', '', '');
-        }
         
         $vCards[] = $vCard;
     }
     
     // Si plusieurs vCards sont créées, les combiner en un seul fichier
-    if (count($vCards) > 1) {
+    if (count($vCards) >= 1) {
         $content = '';
         foreach ($vCards as $vCard) {
             $content .= $vCard->getOutput();
         }
-        $filename = 'contacts_' . $startDate->format('Ymd') . '_' . $endDate->format('Ymd') . '.vcf';
+        $filename = 'VISIBILITY_Contacts_' . $startDate->format('d/m/Y') . '-' . $endDate->format('d/m/Y') . '.vcf';
+
         
         // Retourner le fichier combiné
         return response($content)
@@ -119,22 +115,16 @@ class VCardController extends Controller
         $vCard = new VCard();
         
         // Ajouter les informations de l'utilisateur
-        $vCard->addName('', $user->name, '', '', '');
+        $formattedName = $user->lastname . ' ' . $user->firstname . ' (VISIBILITY)';
+
+        $vCard->addName('', $formattedName, '', '', '');
+
         
         // Formater le numéro de téléphone avec le préfixe "v+"
-        $phoneNumber = 'v+' . preg_replace('/[^0-9]/', '', $user->phone);
+        $phoneNumber = '' . preg_replace('/[^0-9]/', '', $user->phone);
         
         // Ajouter le numéro WhatsApp
         $vCard->addPhoneNumber($phoneNumber, 'WHATSAPP');
-        
-        // Ajouter l'email
-        $vCard->addEmail($user->email);
-        
-        // Ajouter la ville
-        if ($user->ville) {
-            $vCard->addAddress('', '', '', $user->ville, '', '', '');
-        }
-        
         // Retourner la vCard en téléchargement
         return $vCard->download();
     }
