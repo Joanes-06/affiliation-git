@@ -17,6 +17,75 @@ class VCardController extends Controller
     {
         return view('vcards.index');
     }
+/**
+     * Générer et télécharger les fichiers VCF de tous les utilisateurs
+     */
+    public function downloadAllContacts()
+{
+    // Récupérer tous les utilisateurs
+    $users = User::all();
+
+    if ($users->isEmpty()) {
+        return back()->with('error', 'Aucun contact trouvé.');
+    }
+
+    // Enregistrer ce téléchargement dans l'historique de l'utilisateur
+    $user = Auth::user();
+    $lastDownloads = $user->last_vcard_downloads ?? [];
+    
+    // Ajouter le téléchargement actuel au début du tableau (limité à 5 derniers téléchargements)
+    array_unshift($lastDownloads, [
+        'count' => $users->count(),
+        'downloaded_at' => now()->format('Y-m-d H:i:s')
+    ]);
+    
+    // Limiter à 5 derniers téléchargements
+    $lastDownloads = array_slice($lastDownloads, 0, 5);
+    
+    // Mettre à jour l'utilisateur
+    $user->last_vcard_downloads = $lastDownloads;
+    $user->save();
+
+    // Créer un fichier VCF multiple
+    $vCards = [];
+    
+    foreach ($users as $user) {
+        // Créer une nouvelle vCard pour chaque utilisateur
+        $vCard = new VCard();
+        
+        // Ajouter les informations de l'utilisateur
+        $formattedName = $user->lastname . ' ' . $user->firstname . ' (VISIBILITY)';
+        $vCard->addName('', $formattedName, '', '', '');
+        
+        // Formater le numéro de téléphone avec le préfixe "v+" et ajouter le numéro WhatsApp
+        $phoneNumber = '' . preg_replace('/[^0-9]/', '', $user->phone);
+        $vCard->addPhoneNumber($phoneNumber, 'WHATSAPP');
+        
+        $vCards[] = $vCard;
+    }
+    
+    // Si plusieurs vCards sont créées, les combiner en un seul fichier
+    if (count($vCards) >= 1) {
+        $content = '';
+        foreach ($vCards as $vCard) {
+            $content .= $vCard->getOutput();
+        }
+        $filename = 'VISIBILITY_Contacts_All.vcf';
+        
+        // Retourner le fichier combiné
+        return response($content)
+            ->header('Content-type', 'text/x-vcard')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    } elseif (count($vCards) == 1) {
+        // S'il n'y a qu'une seule vCard, la retourner directement
+        $filename = 'contact_all.vcf';
+        
+        return response($vCards[0]->getOutput())
+            ->header('Content-type', 'text/x-vcard')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+}
+
 
     /**
      * Générer et télécharger les fichiers VCF selon la période sélectionnée

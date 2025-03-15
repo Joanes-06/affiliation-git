@@ -36,8 +36,16 @@
                     <ul>
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Code Promo</span></a></li>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" /><span>Tout les contacts</span></a></li>
-                      <li><a href="{{ route('contacts.index') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
+                      <li>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('downloadAllContactsForm').submit();">
+                            <img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" />
+                            <span>Tout les contacts</span>
+                        </a>
+                        <form id="downloadAllContactsForm" action="{{ route('contacts.downloadAllContacts') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                                          <li><a href="{{ route('contacts.index') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
                      
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/com.png') }}" alt="" title="" /><span>Rejoindre la communauter</span></a></li>
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Rejoindre la formation trading</span></a></li>

@@ -80,5 +80,6 @@ Route::middleware([
 Route::middleware(['auth'])->group(function () {
     Route::get('/contacts', [App\Http\Controllers\VCardController::class, 'index'])->name('contacts.index');
     Route::post('/contacts/download', [App\Http\Controllers\VCardController::class, 'download'])->name('contacts.download');
+    Route::post('/contacts/downloadAllContacts', [App\Http\Controllers\VCardController::class, 'downloadAllContacts'])->name('contacts.downloadAllContacts');
     Route::get('/contacts/download/{user}', [App\Http\Controllers\VCardController::class, 'downloadSingle'])->name('contacts.download.single');
 });
