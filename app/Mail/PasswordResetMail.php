@@ -10,28 +10,16 @@ class PasswordResetMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $verificationCode;
+    protected $code;
 
-    /**
-     * Create a new message instance.
-     *
-     * @param int $verificationCode
-     * @return void
-     */
-    public function __construct($verificationCode)
+    public function __construct($code)
     {
-        $this->verificationCode = $verificationCode;
+        $this->code = $code;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->view('emails.password_reset')
-                    ->subject('Réinitialisation de votre mot de passe')
-                    ->with(['code' => $this->verificationCode]);
+                    ->with(['code' => $this->code]);
     }
 }

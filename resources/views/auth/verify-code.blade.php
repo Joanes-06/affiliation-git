@@ -11,6 +11,7 @@
         <p>Veuillez entrer le code de vérification envoyé à votre e-mail.</p>
 
         <form method="POST" action="{{ route('password.verify.code') }}">
+            <input type="hidden" name="code" value="{{ session('code') }}">
             @csrf
 
             <div>

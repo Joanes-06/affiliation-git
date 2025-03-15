@@ -11,9 +11,12 @@
         <p>Veuillez entrer votre nouveau mot de passe.</p>
 
         <form method="POST" action="{{ route('password.reset') }}">
+            <input type="hidden" name="code" value="{{ session('code') }}">
             @csrf
 
             <div>
+                <label for="email">E-mail</label>
+                <input id="email" type="email" name="email" value="{{ session('email') }}" readonly>
                 <label for="password">Nouveau mot de passe</label>
                 <input id="password" type="password" name="password" required>
             </div>

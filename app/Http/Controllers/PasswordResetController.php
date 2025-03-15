@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str; // Ajout de l'importation de Str
 
 class PasswordResetController extends Controller
 {
@@ -14,24 +15,35 @@ class PasswordResetController extends Controller
         // Validation de l'e-mail
         $request->validate(['email' => 'required|email|exists:users,email']);
         
-        // Génération d'un code de vérification
-        $verificationCode = rand(100000, 999999);
+        // Génération d'un code de réinitialisation à 6 chiffres
+        $code = random_int(100000, 999999);
         
-        // Envoi de l'e-mail avec le code de vérification
-        Mail::to($request->email)->send(new \App\Mail\PasswordResetMail($verificationCode));
+        // Envoi de l'e-mail avec le lien de réinitialisation et stockage de l'e-mail dans la session
+        session(['email' => $request->email]);
+        Mail::to($request->email)->send(new \App\Mail\PasswordResetMail($code));
         
         // Redirection vers une page pour entrer le code
-        return redirect()->route('password.verify')->with('status', 'Un code de vérification a été envoyé à votre e-mail.');
+        return redirect()->route('password.verify')->with('status', 'Un lien de réinitialisation a été envoyé à votre e-mail.');
     }
 
     public function verifyCode(Request $request)
     {
         // Validation du code
-        $request->validate(['code' => 'required|digits:6']);
+        $request->validate(['code' => 'required']);
         
         // Vérification du code (logique à ajouter)
         // Si le code est correct, rediriger vers la page de réinitialisation du mot de passe
         return redirect()->route('password.reset.form')->with('status', 'Code vérifié. Veuillez entrer votre nouveau mot de passe.');
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function showResetForm(Request $request)
+    {
+        return view('auth.reset-password')->with(['code' => $request->session()->get('code')]);
     }
 
     public function resetPassword(Request $request)
