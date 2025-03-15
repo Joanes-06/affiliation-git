@@ -37,6 +37,11 @@
                                   
                                     <div class="top-register">
                                         <h3>MOT DE PASSE OUBLIÉ</h3>
+
+                                        @error('email')
+    <div class="text-danger">{{ $message }}</div>
+@enderror
+
                                         <p>Veuillez entrer votre e-mail pour récupérer votre compte.</p>
                                     </div>
                                     

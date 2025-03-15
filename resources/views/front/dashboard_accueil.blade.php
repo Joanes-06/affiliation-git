@@ -61,7 +61,11 @@
     
       <header class="enTetePremium">
         <img src="{{asset('assets/images/VISI noir vert.png')}}" alt="Logo" class="logoEntreprise">
-        
+        <a href="{{ route('logout') }}" class="boutonRetour" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Deconnexion
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
         <a href="#" data-panel="right" class="open-panel"><img src="{{asset('assets/images/profil avatar.png')}}" alt="Logo" class="logoEntreprise">
        </a>
        
@@ -73,10 +77,17 @@
 
 		<div class="zkt47p">
 			<!-- En-tête avec espacement optimisé -->
-			<div class="hgx29m">
-				<div class="jwe56d">L'équipe GBAYE</div>
-				<div class="ftz87s">VISIBILITY vous souhaite la bienvenue!</div>
-			</div>
+<div class="hgx29m">
+    <div class="jwe56d">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
+    <div class="ftz87s"> VISIBILITY vous souhaite la bienvenue!</div>
+</div>
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 	
 			<!-- Cartes Solde et Bénéfice -->
 			<div class="bvx34q">
@@ -98,7 +109,7 @@
 				<button class="yxb67n" id="copyBtn">
 					Copier mon lien
 				</button>
-				<div class="wut89q" id="referralLink">visibility.com/ref/votre-code-unique-ici</div>
+				<div class="wut89q" id="referralLink">{{ route('register', ['code' => Auth::user()->code_promo]) }}</div>
 			</div>
 
       <div class="pp">
