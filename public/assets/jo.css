@@ -1152,6 +1152,9 @@ input:checked + .curseur:before {
     color: #333; /* Couleur du texte */
 }
 
+.toto{
+    line-height: 1.2;
+}
 
 .tt-list-group-item {
     display: flex;
