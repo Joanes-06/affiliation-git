@@ -1,56 +1,7 @@
 @extends('front.layout_dashboard')
 
-    <div class="panel-overlay"></div>
-
- 
-
-    <div class="panel panel-right panel-reveal">
-      <div class="user_login_info">
-	  
-                <div class="user_thumb">
-                <img src="{{ asset('assets/images/abonné.jpg') }}" alt="" title="" />
-                  <div class="user_details">
-
-                   <p>Bienvenue, <span>l'equipe GBAYE</span></p>
-                   
-                  </div>  
-                  <div class="user_avatar"><img src="{{ asset('assets/images/profil.jpg') }}" alt="" title="" /></div>       
-                </div>
-				
-                  <nav class="user-nav">
-                    <ul>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Code Promo</span></a></li>
-                      <li>
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('downloadAllContactsForm').submit();">
-                            <img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" />
-                            <span>Tout les contacts</span>
-                        </a>
-                        <form id="downloadAllContactsForm" action="{{ route('contacts.downloadAllContacts') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
-                                          <li><a href="{{ route('contacts.index') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
-                     
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/com.png') }}" alt="" title="" /><span>Rejoindre la communauter</span></a></li>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Rejoindre la formation trading</span></a></li>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/telegram.png') }}" alt="" title="" /><span>Marketing</span></a></li>
-                    </ul>
-                  </nav>
-                  <nav class="user-navi">
-                    <ul>
-                      <li><a href="{{ asset('assets/index.html') }}"><img src="{{ asset('assets/images/icons/white/deconnexion.png') }}" alt="" title="" /><span>Déconnexion</span></a></li>
-                    </ul>
-                  </nav>
-      </div>
-    </div>
-
-    <div class="views">
-
-      <div class="view view-main">
-<div class="pages">
-  <div data-page="blog" class="page no-toolbar no-navbar">
-    <div class="page-content">
+@section('content')
+    
 
 
 		<div class="zkt47p">
