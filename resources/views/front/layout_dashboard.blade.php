@@ -35,7 +35,7 @@
                   <nav class="user-nav">
                     <ul>
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier Profil</span></a></li>
-                      <li><a href="#"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Code Promo</span></a></li>
+                      <li><a href="{{ route('front.referes') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Programme de référés</span></a></li>
                       <li><a href="#"><img src="{{ asset('assets/images/icons/white/tout contact.png') }}" alt="" title="" /><span>Tout les contacts</span></a></li>
                       <li><a href="{{ route('contacts.index') }}"><img src="{{ asset('assets/images/icons/white/mise contact.png') }}" alt="" title="" /><span>Mise a jour des contact</span></a></li>
                      

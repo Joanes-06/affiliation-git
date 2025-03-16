@@ -39,6 +39,10 @@ Route::get('/plan', function () {
     return view('front.plan');
 })->name('front.plan');
 
+Route::get('/referes', function () {
+    return view('front.referes');
+})->name('front.referes');
+
 Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
 Route::post('/index', [SouscriptionController::class, 'index'])->name('index');
 
