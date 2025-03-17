@@ -24,12 +24,10 @@
                     <header class="enTetePremium">
                         <img src="{{asset('assets/images/VISI noir vert.png')}}" alt="Logo" class="logoEntreprise">
                         
-                        <a href="{{ route('logout') }}" class="boutonRetour" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Retour à l'accueil
+                        <a href="{{ route('front.accueil') }}" class="boutonRetour">Retour à l'accueil
 
                        </a>
-                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                           @csrf
-                       </form>
+                    
                     </header>
 
                     <div class="page-content" style="margin-bottom: 10%">

@@ -18,11 +18,11 @@
 <body id="mobile_wrap">
     <div class="info_popup">
 	<div class="close_info_popup"><img src="{{ asset('assets/images/icons/white/menu_close.png') }}" alt="" title="" /></div>
-	<h2>Save this WEB APP</h2>
-	<h3>on your mobile</h3>
-	<i>Next time you enter load it directly from your mobile home screen</i>
-	<p><span>iOS</span>: Tap the Share button on the menu bar. It’s an icon on the right side that’s a box with an arrow sticking out from it. Tap on Add to Home Screen.</p>
-	<p><span>Android</span>: Tap the browser menu button and tap Add to homescreen</p>
+	<h2>Sauvegarder cette APP WEB</h2>
+	<h3>sur votre télephone</h3>
+	<i>La prochaine fois que vous entrerez, chargez-la directement à partir de l'écran d'accueil de votre téléphone portable.</i>
+	<p><span>iOS</span>: Appuyez sur le bouton Partager dans la barre de menu. Il s'agit d'une icône sur le côté droit qui est une boîte avec une flèche qui en sort. Appuyez sur Ajouter à l'écran d'accueil.</p>
+	<p><span>Android</span>: Appuyez sur le bouton de menu du navigateur et appuyez sur Ajouter à l'écran d'accueil.</p>
     </div>
     <div class="panel-overlay"></div>
 
