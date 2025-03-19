@@ -37,7 +37,7 @@
       
       <nav class="user-nav">
         <ul>
-          <li><a href="#"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier votre Profil</span></a></li>
+          <li><a href="{{route('front.modifier')}}"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier votre Profil</span></a></li>
           <li><a href="{{ route('front.referes') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Liste de référés</span></a></li>
           <li><a href="{{ route('front.plan') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Souscrire à un nouveau pack</span></a></li>
 
