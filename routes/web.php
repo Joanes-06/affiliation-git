@@ -70,7 +70,9 @@ Route::get('/plan', function () {
     return view('front.referes');
 })->name('front.referes')->middleware('auth'); */
 
-
+Route::get('/modifier', function () {
+    return view('front.modifier_profil');
+})->name('front.modifier');
 
 Route::get('/my_referes', [SouscriptionController::class, 'referes'])->name('front.referes')->middleware('auth');
 
