@@ -70,6 +70,11 @@ Route::get('/referes', function () {
     return view('front.referes');
 })->name('front.referes');
 
+
+Route::get('/modifier', function () {
+    return view('front.modifier_profil');
+})->name('front.modifier');
+
 // ==================================================
 // 4. Routes pour les callbacks et les souscriptions
 // ==================================================
