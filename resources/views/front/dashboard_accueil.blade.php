@@ -24,13 +24,13 @@
 				<div class="mke93p nxw52p">
 					<img src="{{ asset('assets/images/icons/white/portefeuil.png') }}" alt="Icône solde" class="rty67x">
 					<div class="sau45w">Solde actuel</div>
-					<div class="tgh78p">0.0 FCFA</div>
+					<div class="tgh78p">{{ number_format($solde, 2) }}FCFA</div>
 				</div>
 	
 				<div class="mke93p pqs89d">
 					<img src="{{ asset('assets/images/icons/white/fleche.png') }}" alt="Icône bénéfice" class="rty67x">
 					<div class="sau45w">Bénéfice total</div>
-					<div class="tgh78p">0.0 FCFA</div>
+					<div class="tgh78p">{{ number_format($benefice_total, 2) }}FCFA</div> 
 				</div>
 			</div>
 	

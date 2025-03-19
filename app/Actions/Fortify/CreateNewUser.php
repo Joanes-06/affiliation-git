@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -78,11 +79,28 @@ class CreateNewUser implements CreatesNewUsers
             'generation2_id' => $parrainageInfo['generation2_id'] ?? null,
         ]);
 
+       // Créer un wallet pour le nouvel utilisateur
+        Wallet::create([
+            'user_id' => $user->id,
+            'solde' => 0,
+            'benefice_total' => 0,
+        ]);
+
+
         // Générer le fichier VCF
         $this->generateVCFFile($user);
 
         return $user;
     }
+
+    private function crediterWallet($userId, $amount) {
+        $wallet = Wallet::where('user_id', $userId)->first();
+        
+        if ($wallet) {
+            $wallet->increment('balance', $amount);
+        }
+    }
+    
 
     private function generateVCFFile(User $user)
     {

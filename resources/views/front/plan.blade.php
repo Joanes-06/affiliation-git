@@ -49,9 +49,26 @@
             <div class="top-title">
               <h3>PLAN D'ABONNEMENT</h3>
           </div>
-              <blockquote>
-                Accédez à des fichiers de contacts et à des formations exclusives selon votre abonnement. Choisissez votre pack et développez votre réseau !                         </blockquote>
+            @php
+            // Récupérer l'ID de l'utilisateur connecté
+            $userId = Auth::id();
+            
+            // Chercher la souscription correspondant à l'utilisateur connecté
+            $souscription = App\Models\Souscription::where('user_id', $userId)
+    ->where('status', 'successful')
+    ->first();
+    
+
+            @endphp
+          @if ($souscription)
+          <blockquote> Vous avez déjà un pack actif. En souscrivant à un nouveau pack, vous annulerez l'ancien, ainsi que tous ses avantages. Profitez d'un accès exclusif aux fichiers de contacts et aux formations en fonction de votre abonnement. Sélectionnez votre pack et boostez votre réseau ! </blockquote>
+          @else
+          <blockquote>
+            Accédez à des fichiers de contacts et à des formations exclusives selon votre abonnement. Choisissez votre pack et développez votre réseau !                         </blockquote>
+          @endif
                 <section class="sectionCartes">
+                 
+                
                     <!-- Carte Débutant -->
                     <div class="carte">
                         <div class="carteEntete">
@@ -71,6 +88,11 @@
                             </ul>                        
                         </div>
                         <div class="cartePied">
+                            @if ($souscription && $souscription->amount == 2000.00  )
+                            <div class="custom-alert-success">
+                                <p>Pack souscrit !</p>
+                            </div>
+                            @else
                             <form action="{{ route('feda.callback') }}" method="post" id="payment-form-debutant">
                                 @csrf
                                 <input type="hidden" name="field" value="test">
@@ -88,6 +110,8 @@
                                     data-callback-url="{{ route('feda.callback') }}"
                                 ></script>
                             </form>
+                           
+                            @endif
                         </div>
                     </div>
                 
@@ -111,6 +135,11 @@
                             </ul>
                         </div>
                         <div class="cartePied">
+                            @if ($souscription && $souscription->amount == 5000.00 )
+                            <div class="custom-alert-success">
+                                <p>Pack souscrit !</p>
+                            </div>
+                            @else
                             <form action="{{ route('feda.callback') }}" method="post" id="payment-form-pro">
                                 @csrf
                                 <input type="hidden" name="field" value="test">
@@ -128,7 +157,8 @@
                                     data-callback-url="{{ route('feda.callback') }}"
                                 ></script>
                             </form>
-                            </form>
+                        
+                            @endif
                         </div>
                     </div>
                 
@@ -151,6 +181,12 @@
                             </ul>
                         </div>
                         <div class="cartePied">
+                            @if ($souscription && $souscription->amount == 10000.00 )
+                            <div class="custom-alert-success">
+                                <p>Pack souscrit !</p>
+                            </div>
+                            @else
+
                             <form action="{{ route('feda.callback') }}" method="post" id="payment-form-elite">
                                 @csrf
                                 <input type="hidden" name="field" value="test">
@@ -168,9 +204,12 @@
                                     data-callback-url="{{ route('feda.callback') }}"
                                 ></script>
                             </form>
+                           
+                            @endif
                         </div>
                     </div>
                 </section>
+                
                 
              
         

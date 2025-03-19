@@ -5,7 +5,7 @@
 <div class="hh-container">
     <header class="hh-header">
         <h1 class="hh-title">Programme de Référés</h1>
-        <p class="hh-subtitle">Découvrez votre réseau de référés à travers les Paliers et suivez l’évolution de votre communauté.</p>
+        <p class="hh-subtitle">Découvrez votre réseau de référés à travers les Paliers et suivez l’évolution de votre communauté.</p>
     </header>
     
     <div class="hh-tabs">
@@ -15,188 +15,147 @@
     </div>
     
     <div class="">
+        @if (isset($palier1) && $palier1->count() > 0)
         <div class="hh-panel hh-active" id="generation-1">
             <h2 class="hh-section-title">Palier 1 - Vos référes directs</h2>
             <div class="hh-user-grid">
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">MT</div>
-                    <h3 class="hh-user-name">Marie Torval</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P1</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">4</div>
-                            Référes
+                @foreach ($palier1 as $user)
+                    @php
+                        // Déterminer le pack en fonction du montant de la souscription
+                        $pack = '';
+                        if ($user->souscription->amount == 2000.00) {
+                            $pack = 'Débutant';
+                             
+                        } elseif ($user->souscription->amount == 5000.00) {
+                            $pack = 'Pro';
+                        } elseif ($user->souscription->amount == 10000.00) {
+                            $pack = 'Élite';
+                        }
+                        
+
+                        // Calculer le gain en fonction du palier
+                        $gain = 0;
+                        if ($user->inviteur_id == Auth::user()->id) {
+                           
+
+                            $gain = $user->souscription->amount * 0.50; // 50% pour le palier 1
+                        }
+                    @endphp
+                    <div class="hh-user-card">
+                        <div class="hh-user-avatar">
+                            {{ strtoupper(substr($user->lastname, 0, 1)) }}{{ strtoupper(substr($user->firstname, 0, 1)) }}
+                        </div>
+                        <h3 class="hh-user-name">{{ $user->lastname }} {{ $user->firstname }}</h3>
+                        <div class="hh-user-info">
+                            <div class="hh-user-badge">gain:{{ number_format($gain, 2) }} FCFA ({{ $pack }})</div>
+                            <div class="hh-user-referrals">
+                                <div class="hh-user-circle">
+                                    {{ $user->where('inviteur_id', $user->id)->count()}}
+                                          
+                                </div>
+                                Référés
+                            </div>
+                          
                         </div>
                     </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">PD</div>
-                    <h3 class="hh-user-name">Philippe Durand</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P1</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">3</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">SL</div>
-                    <h3 class="hh-user-name">Sophie Legrand</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P1</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">5</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        
+        @else
+        <p>Aucun référé direct trouvé.</p>
+        @endif
+
+        @if (isset($palier2) && $palier2->count() > 0)
         <div class="hh-panel" id="generation-2">
             <h2 class="hh-section-title">Palier 2 - référes de vos référes</h2>
             <div class="hh-user-grid">
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">JM</div>
-                    <h3 class="hh-user-name">Jean Martin</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P2</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">2</div>
-                            Référes
+                @foreach ($palier2 as $user)
+                    @php
+                        // Déterminer le pack en fonction du montant de la souscription
+                        $pack = '';
+                        if ($user->souscription->amount == 2000.00) {
+                            $pack = 'Débutant';
+                        } elseif ($user->souscription->amount == 5000.00) {
+                            $pack = 'Pro';
+                        } elseif ($user->souscription->amount == 10000.00) {
+                            $pack = 'Élite';
+                        }
+
+                        // Calculer le gain en fonction du palier
+                        $gain = 0;
+                        if ($user->generation1_id == Auth::id()) {
+                            $gain = $user->souscription->amount * 0.25; // 25% pour le palier 2
+                        }
+                    @endphp
+                    <div class="hh-user-card">
+                        <div class="hh-user-avatar">
+                            {{ strtoupper(substr($user->lastname, 0, 1)) }}{{ strtoupper(substr($user->firstname, 0, 1)) }}
+                        </div>
+                        <h3 class="hh-user-name">{{ $user->lastname }} {{ $user->firstname }}</h3>
+                        <div class="hh-user-info">
+                            <div class="hh-user-badge">gain:{{ number_format($gain, 2) }} FCFA ({{ $pack }})</div>
+                            <div class="hh-user-referrals">
+                                <div class="hh-user-circle">
+                                    {{ $user->where('inviteur_id', $user->id)->count()}}
+                                </div>
+                                Référés
+                            </div>
+                            
                         </div>
                     </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">LB</div>
-                    <h3 class="hh-user-name">Lucas Blanc</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P2</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">3</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">AM</div>
-                    <h3 class="hh-user-name">Alice Mercier</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P2</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">1</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">CD</div>
-                    <h3 class="hh-user-name">Claire Dubois</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P2</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">2</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">TR</div>
-                    <h3 class="hh-user-name">Thomas Rousseau</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P2</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">4</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        
+        @else
+        <p>Aucun référé indirect trouvé.</p>
+        @endif
+
+        @if (isset($palier3) && $palier3->count() > 0)
         <div class="hh-panel" id="generation-3">
             <h2 class="hh-section-title">Palier 3 - Réseau étendu</h2>
             <div class="hh-user-grid">
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">EL</div>
-                    <h3 class="hh-user-name">Emma Laurent</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">4</div>
-                            Référes
+                @foreach ($palier3 as $user)
+                    @php
+                        // Déterminer le pack en fonction du montant de la souscription
+                        $pack = '';
+                        if ($user->souscription->amount == 2000.00) {
+                            $pack = 'Débutant';
+                        } elseif ($user->souscription->amount == 5000.00) {
+                            $pack = 'Pro';
+                        } elseif ($user->souscription->amount == 10000.00) {
+                            $pack = 'Élite';
+                        }
+
+                        // Calculer le gain en fonction du palier
+                        $gain = 0;
+                        if ($user->generation2_id == Auth::id()) {
+                            $gain = $user->souscription->amount * 0.125; // 12.5% pour le palier 3
+                        }
+                    @endphp
+                    <div class="hh-user-card">
+                        <div class="hh-user-avatar">
+                            {{ strtoupper(substr($user->lastname, 0, 1)) }}{{ strtoupper(substr($user->firstname, 0, 1)) }}
+                        </div>
+                        <h3 class="hh-user-name">{{ $user->lastname }} {{ $user->firstname }}</h3>
+                        <div class="hh-user-info">
+                            <div class="hh-user-badge">gain:{{ number_format($gain, 2) }} FCFA ({{ $pack }})</div>
+                            <div class="hh-user-referrals">
+                                <div class="hh-user-circle">
+                                    {{ $user->where('inviteur_id', $user->id)->count()}}
+                                </div>
+                                Référés
+                            </div>
+                            <div class="hh-user-gain">
+                              
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">NR</div>
-                    <h3 class="hh-user-name">Nicolas Robert</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">1</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">NR</div>
-                    <h3 class="hh-user-name">Nicolas Robert</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">1</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">JD</div>
-                    <h3 class="hh-user-name">Julie Dupont</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">0</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">MB</div>
-                    <h3 class="hh-user-name">Marc Bertrand</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">2</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hh-user-card">
-                    <div class="hh-user-avatar">CP</div>
-                    <h3 class="hh-user-name">Camille Petit</h3>
-                    <div class="hh-user-info">
-                        <div class="hh-user-badge">P3</div>
-                        <div class="hh-user-referrals">
-                            <div class="hh-user-circle">1</div>
-                            Référes
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
+        @else
+        <p>Aucun référé niveau 3 trouvé.</p>
+        @endif
     </div>
 </div>
 

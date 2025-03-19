@@ -94,4 +94,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'inviteur_id');
     }
+
+    public function wallet() {
+        return $this->hasOne(Wallet::class);
+    }
+    public function souscription()
+{
+    return $this->hasOne(Souscription::class); // Relation 1:1 avec la souscription
+}
+
+    
 }

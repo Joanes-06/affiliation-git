@@ -7,45 +7,77 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str; // Ajout de l'importation de Str
+use Carbon\Carbon; // Importation de Carbon pour la gestion du temps
 
 class PasswordResetController extends Controller
 {
     public function sendResetLink(Request $request)
     {
-        // Validation de l'e-mail
         $request->validate([
             'email' => 'required|email|exists:users,email',
         ], [
-            'email.required' => 'L\'adresse email est obligatoire.',
-            'email.email' => 'Veuillez entrer une adresse email valide.',
-            'email.exists' => 'Aucun compte ne correspond à cet email.',
+            'email.required' => 'Veuillez renseigner votre adresse e-mail.',
+            'email.email' => 'L\'adresse e-mail saisie n\'est pas valide.',
+            'email.exists' => 'Aucun compte n\'est associé à cette adresse e-mail.',
         ]);
-        
-        
-        // Génération d'un code de réinitialisation à 6 chiffres
+    
         $code = random_int(100000, 999999);
-        
-        // Envoi de l'e-mail avec le lien de réinitialisation et stockage de l'e-mail dans la session
-        session(['email' => $request->email]);
+        session([
+            'reset_code' => $code,
+            'reset_code_expires_at' => Carbon::now()->addSeconds(60),
+            'email' => $request->email,
+            'countdown_started' => true
+        ]);
+    
         Mail::to($request->email)->send(new \App\Mail\PasswordResetMail($code));
-        
-        // Redirection vers une page pour entrer le code
-        return redirect()->route('password.verify')->with('status', 'Un lien de réinitialisation a été envoyé à votre e-mail.');
+    
+        return redirect()->route('password.verify')->with('status', 'Un code de réinitialisation a été envoyé.');
     }
-
+    
+    public function resendCode(Request $request)
+    {
+        $email = session('email');
+        if (!$email) {
+            return back()->withErrors(['email' => 'Aucune demande de réinitialisation trouvée.']);
+        }
+    
+        if (session('reset_code_expires_at') && Carbon::now()->lessThan(session('reset_code_expires_at'))) {
+            return back()->withErrors(['email' => 'Veuillez attendre avant de demander un nouveau code.']);
+        }
+    
+        $code = random_int(100000, 999999);
+        session([
+            'reset_code' => $code,
+            'reset_code_expires_at' => Carbon::now()->addSeconds(60),
+            'countdown_started' => true
+        ]);
+    
+        Mail::to($email)->send(new \App\Mail\PasswordResetMail($code));
+    
+        return back()->with('status', 'Un nouveau code a été envoyé.');
+    }
+    
     public function verifyCode(Request $request)
     {
-        // Validation du code
         $request->validate([
-            'code' => 'required',
+            'code' => 'required|numeric',
         ], [
             'code.required' => 'Le code est obligatoire.',
+            'code.numeric' => 'Le code doit être un nombre.',
         ]);
-        
-        
-        // Vérification du code (logique à ajouter)
-        // Si le code est correct, rediriger vers la page de réinitialisation du mot de passe
-        return redirect()->route('password.reset.form')->with('status', 'Code vérifié. Veuillez entrer votre nouveau mot de passe.');
+    
+        $storedCode = session('reset_code');
+        $expiresAt = session('reset_code_expires_at');
+    
+        if (!$storedCode || !$expiresAt || Carbon::now()->greaterThan($expiresAt)) {
+            return back()->withErrors(['code' => 'Le code a expiré. Veuillez demander un nouveau code.']);
+        }
+    
+        if ($request->code == $storedCode) {
+            return redirect()->route('password.reset.form')->with('status', 'Code vérifié. Veuillez entrer votre nouveau mot de passe.');
+        } else {
+            return back()->withErrors(['code' => 'Le code saisi est incorrect.']);
+        }
     }
 
     public function showForgotPasswordForm()
@@ -73,7 +105,6 @@ class PasswordResetController extends Controller
             'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
             'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
-        
 
         // Mise à jour du mot de passe de l'utilisateur
         $user = User::where('email', $request->email)->first();
@@ -85,4 +116,7 @@ class PasswordResetController extends Controller
         // Redirection vers la page de connexion
         return redirect()->route('login')->with('status', 'Votre mot de passe a été réinitialisé avec succès.');
     }
+
+  
+
 }

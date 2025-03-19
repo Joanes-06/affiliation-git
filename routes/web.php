@@ -19,8 +19,9 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'
 Route::get('/verify-code', function () {
     return view('auth.verify-code');
 })->name('password.verify');
+Route::post('/password/resend-code', [PasswordResetController::class, 'resendCode'])->name('password.resend.code');
 
-// Vérifie le code de réinitialisation
+
 Route::post('/verify-code', [PasswordResetController::class, 'verifyCode'])->name('password.verify.code');
 
 // Affiche le formulaire pour demander une réinitialisation
@@ -63,23 +64,17 @@ Route::get('/contact', function () {
 // Page des plans (nommée 'front.plan')
 Route::get('/plan', function () {
     return view('front.plan');
-})->name('front.plan');
+})->name('front.plan')->middleware('auth');
 
-// Page des références (nommée 'front.referes')
-Route::get('/referes', function () {
+/* Route::get('/referes', function () {
     return view('front.referes');
-})->name('front.referes');
+})->name('front.referes')->middleware('auth'); */
 
 
-Route::get('/modifier', function () {
-    return view('front.modifier_profil');
-})->name('front.modifier');
 
-// ==================================================
-// 4. Routes pour les callbacks et les souscriptions
-// ==================================================
+Route::get('/my_referes', [SouscriptionController::class, 'referes'])->name('front.referes')->middleware('auth');
 
-// Gère un callback (probablement pour un paiement ou une intégration externe)
+
 Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
 
 // Route pour la méthode index du SouscriptionController
