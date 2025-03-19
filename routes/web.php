@@ -13,6 +13,9 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'
 Route::get('/verify-code', function () {
     return view('auth.verify-code');
 })->name('password.verify');
+Route::post('/password/resend-code', [PasswordResetController::class, 'resendCode'])->name('password.resend.code');
+
+
 Route::post('/verify-code', [PasswordResetController::class, 'verifyCode'])->name('password.verify.code');
 
 // Route pour afficher le formulaire de réinitialisation du mot de passe
@@ -37,11 +40,16 @@ Route::get('/contact', function () {
 });
 Route::get('/plan', function () {
     return view('front.plan');
-})->name('front.plan');
+})->name('front.plan')->middleware('auth');
 
-Route::get('/referes', function () {
+/* Route::get('/referes', function () {
     return view('front.referes');
-})->name('front.referes');
+})->name('front.referes')->middleware('auth'); */
+
+
+
+Route::get('/my_referes', [SouscriptionController::class, 'referes'])->name('front.referes')->middleware('auth');
+
 
 Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
 Route::post('/index', [SouscriptionController::class, 'index'])->name('index');

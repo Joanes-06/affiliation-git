@@ -66,15 +66,17 @@
                                     <p>Derniers téléchargements</p>
                                 </div>
                                 @if(auth()->user()->last_vcard_downloads && count(auth()->user()->last_vcard_downloads) > 0)
-                                    <ul class="tt-list-group">
-                                        @foreach(auth()->user()->last_vcard_downloads as $download)
-                                            <li class="tt-list-group-item d-flex justify-content-between align-items-center">
-                                                Du {{ \Carbon\Carbon::parse($download['start_date'])->format('d/m/Y') }} 
-                                                au {{ \Carbon\Carbon::parse($download['end_date'])->format('d/m/Y') }}
-                                                <span class="tt-badge tt-bg-primary tt-rounded-pill">{{ $download['count'] }} contacts</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <ul class="tt-list-group">
+                                    
+                                    @foreach(auth()->user()->last_vcard_downloads as $download)
+                                    <li class="tt-list-group-item d-flex justify-content-between align-items-center">
+                                        Du {{ \Carbon\Carbon::parse($download['start_date'])->format('d/m/Y') }} 
+                                        au {{ \Carbon\Carbon::parse($download['end_date'])->format('d/m/Y') }}
+                                        <span class="tt-badge tt-bg-primary tt-rounded-pill">{{ $download['count'] }} contacts</span>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                
                                 @else
                                     <p class="tt-text-muted">Aucun téléchargement précédent enregistré.</p>
                                 @endif
