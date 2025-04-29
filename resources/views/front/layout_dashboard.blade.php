@@ -21,6 +21,27 @@
     
     // Chercher la souscription correspondant à l'utilisateur connecté
     $souscription = App\Models\Souscription::where('user_id', $userId)->first();
+
+  
+    use FedaPay\FedaPay;
+    use FedaPay\Transaction;
+
+    FedaPay::setApiKey(config('services.fedapay.secret_key'));
+    FedaPay::setEnvironment(config('services.fedapay.env'));
+
+    try {
+    
+      $transactions = Transaction::all([
+    'customer_email' => Auth::user()->email
+]);
+
+
+        dd($transactions);
+        
+    } catch (\Exception $e) {
+        $transactions = collect(); // Collection vide en cas d'erreur
+    }
+
   @endphp
   
   <div class="panel-overlay"></div>
@@ -37,10 +58,13 @@
       
       <nav class="user-nav">
         <ul>
-          <li><a href="{{route('front.modifier')}}"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Modifier votre Profil</span></a></li>
+          <li><a href="{{route('infosPersos')}}"><img src="{{ asset('assets/images/icons/white/profilead.png') }}" alt="" title="" /><span>Vos Informations Personnelles</span></a></li>
           <li><a href="{{ route('front.referes') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Liste de référés</span></a></li>
           <li><a href="{{ route('front.plan') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Souscrire à un nouveau pack</span></a></li>
-
+        
+              <li><a href="{{ route('withdraw.history') }}"><img src="{{ asset('assets/images/icons/white/affiliation.png') }}" alt="" title="" /><span>Historique des retraits</span></a></li>
+          
+          
           <!-- Formulaire pour télécharger tous les contacts -->
           <li>
             <a href="{{ route('contacts.downloadAllContacts') }}" onclick="event.preventDefault(); document.getElementById('downloadForm').submit();">

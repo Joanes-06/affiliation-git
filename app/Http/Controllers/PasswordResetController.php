@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str; // Ajout de l'importation de Str
 use Carbon\Carbon; // Importation de Carbon pour la gestion du temps
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PasswordResetController extends Controller
 {
@@ -115,6 +117,52 @@ class PasswordResetController extends Controller
 
         // Redirection vers la page de connexion
         return redirect()->route('login')->with('status', 'Votre mot de passe a été réinitialisé avec succès.');
+    }
+
+    public function authResetPassword(Request $request)
+    {
+        // Messages d'erreur personnalisés
+        $messages = [
+            'oldpassword.required' => 'L\'ancien mot de passe est requis.',
+            'oldpassword.string' => 'L\'ancien mot de passe doit être une chaîne de caractères.',
+            'password.required' => 'Le nouveau mot de passe est requis.',
+            'password.string' => 'Le nouveau mot de passe doit être une chaîne de caractères.',
+            'password.min' => 'Le nouveau mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'password_confirmation.required' => 'La confirmation du mot de passe est requise.',
+            'password_confirmation.string' => 'La confirmation du mot de passe doit être une chaîne de caractères.',
+        ];
+
+        // Validation des champs avec messages personnalisés
+        $validator = Validator::make($request->all(), [
+            'oldpassword' => 'required|string',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string',
+        ], $messages);
+
+        // Si la validation échoue, rediriger avec les erreurs
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        // Récupérer l'utilisateur connecté
+        $user = Auth::user();
+
+        // Vérifier si l'ancien mot de passe est correct
+        if (!Hash::check($request->oldpassword, $user->password)) {
+            return redirect()->back()
+                             ->withErrors(['oldpassword' => 'L\'ancien mot de passe est incorrect.'])
+                             ->withInput();
+        }
+
+        // Mettre à jour le mot de passe
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('home')->with('success', 'Votre mot de passe a été réinitialisé avec succès.');
     }
 
   

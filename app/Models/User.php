@@ -102,6 +102,10 @@ class User extends Authenticatable
 {
     return $this->hasOne(Souscription::class); // Relation 1:1 avec la souscription
 }
+public function transactions()
+{
+    return $this->hasMany(Transaction::class);
+}
 
     
 }

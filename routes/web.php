@@ -2,6 +2,8 @@
 
 // Importation des contrôleurs et classes nécessaires
 use App\Http\Controllers\SouscriptionController;
+use App\Http\Controllers\MomoController;
+use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\PasswordResetController; // Contrôleur pour la réinitialisation du mot de passe
 use Illuminate\Support\Facades\Route; // Pour définir les routes
 use Illuminate\Support\Facades\Auth; // Pour gérer l'authentification
@@ -28,10 +30,11 @@ Route::post('/verify-code', [PasswordResetController::class, 'verifyCode'])->nam
 Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.request');
 
 // Affiche le formulaire de réinitialisation du mot de passe
-Route::get('/reset-password', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+Route::get('/reset-password-form', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
 
 // Réinitialise le mot de passe
-Route::post('/reset', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.redefine');
+Route::post('/reset', [PasswordResetController::class, 'authResetPassword'])->name('password.resett');
 
 // ==================================================
 // 2. Route pour le parrainage
@@ -73,11 +76,26 @@ Route::get('/plan', function () {
 Route::get('/modifier', function () {
     return view('front.modifier_profil');
 })->name('front.modifier');
+Route::post('/profile/update', [SouscriptionController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
+
+Route::put('/profile/photo/update', [SouscriptionController::class, 'updateProfilePhoto'])->name('profile.photo.update')->middleware('auth');
+
+Route::get('/modifier_mon_mot_de_passe', function () {
+    return view('front.modifierPassword');
+})->name('front.modifierPassword');
+
+
+Route::get('/informations_personnelles', function () {
+    return view('front.infosPersos');
+})->name('infosPersos');
 
 Route::get('/my_referes', [SouscriptionController::class, 'referes'])->name('front.referes')->middleware('auth');
 
 
 Route::post('/feda-callback', [SouscriptionController::class, 'handleFedaCallback'])->name('feda.callback');
+Route::post('/fedapay/callback', [WithdrawController::class, 'callback'])->name('withdraw.callback');
+
+
 
 // Route pour la méthode index du SouscriptionController
 Route::post('/index', [SouscriptionController::class, 'index'])->name('index');
@@ -154,3 +172,32 @@ Route::middleware(['auth'])->group(function () {
     // Télécharge un contact spécifique
     Route::get('/contacts/download/{user}', [App\Http\Controllers\VCardController::class, 'downloadSingle'])->name('contacts.download.single');
 });
+
+
+
+
+
+// Route pour afficher le formulaire de retrait
+Route::get('/withdraw', [WithdrawController::class, 'showWithdrawForm'])->name('withdraw.funds')->middleware('auth');
+
+// Route pour traiter la demande de retrait
+Route::post('/withdraw', [WithdrawController::class, 'processWithdraw'])->name('withdraw.process')->middleware('auth');
+Route::get('/withdraw/history', [WithdrawController::class, 'history'])->name('withdraw.history');
+
+
+
+
+
+
+
+// Routes pour ajouter un numéro Mobile Money
+Route::get('/momo/quiz', [MomoController::class, 'showQuizForm'])->name('momo.quiz')->middleware('auth');
+Route::post('/momo/store-quiz', [MomoController::class, 'storeQuiz'])->name('momo.store.quiz')->middleware('auth');
+Route::get('/momo/add', [MomoController::class, 'showAddMomoForm'])->name('momo.add')->middleware('auth');
+Route::post('/momo/store', [MomoController::class, 'storeMomo'])->name('momo.store')->middleware('auth');
+
+// Routes pour modifier un numéro Mobile Money
+Route::get('/momo/answer-quiz', [MomoController::class, 'showAnswerQuizForm'])->name('momo.answerQuiz')->middleware('auth');
+Route::post('/momo/verify-quiz', [MomoController::class, 'verifyQuiz'])->name('momo.verify.quiz')->middleware('auth');
+Route::get('/momo/edit', [MomoController::class, 'showEditMomoForm'])->name('momo.edit')->middleware('auth');
+Route::post('/momo/update', [MomoController::class, 'updateMomo'])->name('momo.update')->middleware('auth');

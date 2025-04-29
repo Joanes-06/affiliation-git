@@ -10,7 +10,9 @@ use App\Models\Wallet; // Modèle "Wallet" pour gérer le solde et bénéfices
 use Illuminate\Support\Facades\Log;
 use FedaPay\FedaPay;
 use FedaPay\Transaction;
+use Illuminate\Support\Facades\Storage;
 use FedaPay\Customer;
+use Illuminate\Support\Facades\Validator;
 
 class SouscriptionController extends Controller
 {
@@ -27,6 +29,7 @@ class SouscriptionController extends Controller
 
     public function handleFedaCallback(Request $request)
     {
+        
         Log::info('FedaPay Callback reçu', $request->all());
 
         try {
@@ -197,6 +200,86 @@ class SouscriptionController extends Controller
         $palier3 = User::where('generation2_id', $user->id)->with('souscription')->get();
     
         return view('front.referes', compact('palier1', 'palier2', 'palier3', 'user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Récupérer l'utilisateur connecté
+        $user = Auth::user();
+
+        // Messages d'erreur personnalisés
+        $messages = [
+            'lastname.required' => 'Le champ nom est requis.',
+            'lastname.string' => 'Le champ nom doit être une chaîne de caractères.',
+            'lastname.max' => 'Le champ nom ne doit pas dépasser 255 caractères.',
+            'firstname.required' => 'Le champ prénom est requis.',
+            'firstname.string' => 'Le champ prénom doit être une chaîne de caractères.',
+            'firstname.max' => 'Le champ prénom ne doit pas dépasser 255 caractères.',
+            'email.required' => 'Le champ email est requis.',
+            'email.email' => 'Le champ email doit être une adresse email valide.',
+            'email.unique' => 'Cette adresse email est déjà utilisée.',
+            'phone.string' => 'Le champ téléphone doit être une chaîne de caractères.',
+            'phone.max' => 'Le champ téléphone ne doit pas dépasser 20 caractères.',
+            'ville.string' => 'Le champ ville doit être une chaîne de caractères.',
+            'ville.max' => 'Le champ ville ne doit pas dépasser 255 caractères.',
+            'code_promo.string' => 'Le champ code promo doit être une chaîne de caractères.',
+            'code_promo.max' => 'Le champ code promo ne doit pas dépasser 255 caractères.',
+        ];
+
+        // Validation des champs avec messages personnalisés
+        $validator = Validator::make($request->all(), [
+            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'ville' => 'nullable|string|max:255',
+            'code_promo' => 'nullable|string|max:255',
+        ], $messages);
+
+        // Si la validation échoue, rediriger avec les erreurs
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        // Mettre à jour les informations de l'utilisateur
+        $user->lastname = $request->lastname;
+        $user->firstname = $request->firstname;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->ville = $request->ville;
+        $user->code_promo = $request->code_promo;
+        $user->save();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('infosPersos')->with('success', 'Votre profil a été mis à jour avec succès.');
+    }
+
+    public function updateProfilePhoto(Request $request)
+    {
+        // Validation du fichier uploadé
+        $request->validate([
+            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB max
+        ]);
+
+        // Récupérer l'utilisateur connecté
+        $user = Auth::user();
+
+        // Supprimer l'ancienne photo de profil si elle existe
+        if ($user->profile_photo_path) {
+            Storage::delete('public/' . $user->profile_photo_path);
+        }
+
+        // Stocker la nouvelle photo de profil
+        $path = $request->file('profile_photo')->store('profile-photos', 'public');
+
+        // Mettre à jour le chemin de la photo de profil dans la base de données
+        $user->profile_photo_path = $path;
+        $user->save();
+
+        // Rediriger avec un message de succès
+        return to_route('infosPersos')->with('success', 'Votre photo de profil a été mise à jour avec succès.');
     }
     
 

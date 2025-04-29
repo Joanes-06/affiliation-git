@@ -8,4 +8,9 @@ return [
     ],
     'confirmed' => 'La confirmation du mot de passe ne correspond pas.',
     // Ajoute d'autres traductions ici selon ton besoin
+
+    'max' => [
+    'string' => "Le numéro Mobile Money ne doit pas dépasser :max caractères.",
+],
+
 ];

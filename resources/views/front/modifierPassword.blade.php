@@ -13,15 +13,23 @@
 
                                 <div class="loginform">
                         
-                                    <form method="POST" action="{{ route('password.redefine') }}">
+                                    <form method="POST" action="{{ route('password.resett') }}">
                                         @csrf
                                       
                             
-                                         <!-- Champ Email -->
-                                         <div class="mt-4">
-                                            <x-input id="email" class="form_input" type="hidden" name="email" value="{{ session('email') }}" />
+                                        <!-- Champ Email -->
+                                        <div class="mt-4">
+                                            <x-input id="email" class="form_input" type="hidden" name="email" value="{{ Auth::user()->email }}" />
                                         </div>
                                            
+                                        <!-- Champ  Ancien Mot de passe -->
+                                        <div class="mt-4">
+                                            <x-label for="oldpassword" value="{{ __('Ancien mot de passe') }}" />
+                                            <x-input id="oldpassword" class="form_input" type="password" name="oldpassword" required  placeholder="Ancien mot de passe" />
+                                            @error('oldpassword')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <!-- Champ Mot de passe -->
                                         <div class="mt-4">
                                             <x-label for="password" value="{{ __('Nouveau mot de passe') }}" />

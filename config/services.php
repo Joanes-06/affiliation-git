@@ -14,12 +14,21 @@ return [
     |
     */
 
-   'fedapay' => [
-    'secret' => env('FEDAPAY_SECRET_KEY'),
+
+'fedapay' => [
     'public' => env('FEDAPAY_PUBLIC_KEY'),
-    'mode' => env('FEDAPAY_MODE', 'sandbox'), // 'live' pour la production
+    'secret' => env('FEDAPAY_SECRET_KEY'),
+    'mode' => env('FEDAPAY_MODE', 'sandbox'), 
+    'callback_url' => env('FEDAPAY_CALLBACK_URL', 'https://1733-197-234-221-249.ngrok-free.app/fedapay/callback')
+    
+    
 ],
 
+'twilio' => [
+    'sid' => env('TWILIO_SID'),
+    'auth_token' => env('TWILIO_AUTH_TOKEN'),
+    'phone_number' => env('TWILIO_PHONE_NUMBER'),
+],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

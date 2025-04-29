@@ -21,7 +21,7 @@ class CreateNewUser implements CreatesNewUsers
             'Firstname' => ['required', 'string', 'max:255'],
             'Email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'Password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'string', 'max:255', 'regex:/^\+[0-9]{1,3}\s?[0-9]{3,15}$/'],
+            'phone' => ['required', 'string', 'max:255', 'regex:/^\+[0-9]{1,3}\s?[0-9]{3,15}$/', 'unique:users,phone'],
             'Ville' => ['required', 'string', 'max:100'],
             'code_promo' => ['nullable', 'string', 'exists:users,code_promo'],
         ];
@@ -30,15 +30,15 @@ class CreateNewUser implements CreatesNewUsers
             'Username.required' => 'Le champ Nom est requis.',
             'Username.string' => 'Le champ Nom doit être une chaîne de caractères.',
             'Username.max' => 'Le champ Nom ne doit pas dépasser 255 caractères.',
-
+    
             'Firstname.required' => 'Le champ prénom est requis.',
-            'Firstname.string' => 'Le champ  prénom doit être une chaîne de caractères.',
+            'Firstname.string' => 'Le champ prénom doit être une chaîne de caractères.',
             'Firstname.max' => 'Le champ prénom ne doit pas dépasser 255 caractères.',
     
             'Email.required' => 'Le champ Email est requis.',
             'Email.string' => 'Le champ Email doit être une chaîne de caractères.',
             'Email.email' => 'Veuillez entrer une adresse email valide.',
-            'Email.max' => 'L\'adresse email ne doit pas dépasser 255 caractères.',
+            'Email.max' => 'votre adresse email ne doit pas dépasser 255 caractères.',
             'Email.unique' => 'Cette adresse email est déjà utilisée.',
     
             'Password.required' => 'Le mot de passe est requis.',
@@ -48,14 +48,15 @@ class CreateNewUser implements CreatesNewUsers
     
             'phone.required' => 'Le numéro de téléphone est requis.',
             'phone.string' => 'Le numéro de téléphone doit être une chaîne de caractères.',
-            'phone.max' => 'Le numéro de téléphone ne doit pas dépasser 20 caractères.',
+            'phone.max' => 'Le numéro de téléphone ne doit pas dépasser 255 caractères.',
             'phone.regex' => 'Veuillez entrer l’indicatif de votre pays (ex. : **+226** pour le **Burkina Faso**).',
+            'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
     
             'Ville.required' => 'La ville est requise.',
             'Ville.string' => 'La ville doit être une chaîne de caractères.',
             'Ville.max' => 'La ville ne doit pas dépasser 100 caractères.',
             
-            'code_promo.exists' => 'Le code promo n\'est pas valide.',
+            'code_promo.exists' => 'Le code promo est invalide.',
         ];
     
         Validator::make($input, $rules, $messages)->validate();
